@@ -1,0 +1,7 @@
+---
+title: "Lab 1: FPGA and MCU Testing and Setup"
+description: "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog."
+author: "Thomas Lilygren"
+date: "9/1/25"
+draft: false
+---

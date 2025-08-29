@@ -1,0 +1,10 @@
+---
+title: "Lab 7: The Advanced Encryption Standard"
+description: "Lab 7 description"
+author: "Thomas Lilygren"
+date: "10/13/25"
+categories:
+  - Reflection
+  - Lab Report
+draft: false
+---

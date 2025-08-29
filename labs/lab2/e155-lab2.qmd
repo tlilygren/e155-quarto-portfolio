@@ -1,0 +1,7 @@
+---
+title: "Lab 2: Multiplexed 7-Segment Display"
+description: "Lab 2 description"
+author: "Thomas Lilygren"
+date: "9/8/25"
+draft: false
+---

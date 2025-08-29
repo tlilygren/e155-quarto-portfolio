@@ -1,0 +1,11 @@
+---
+title: "Goals for MicroPs"
+description: "Here I outline why I enrolled in E155 and what I hope to gain from my experience."
+author: "Thomas Lilygren"
+date: "8/29/25"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+I remember wanting to take MicroPs before I even declared as an engineering major. Not only because the projects from previous cohorts left me in awe, but also because each person I talked to described this as one of their most rewarding experiences. E155 explores so many facets of digital and hardware design and instills coveted skills that apply to all realms of engineering. I hope to use this opportunity to push myself beyond the limits I untinentionally impose on myself and embrace the uncertainty that comes along with the rigorous curriculum. I aspire to learn the techniques, time management, decision-making skills, and debugging practices that industry experts employ on a day-to-day basis. On top of this, I hope to forge new friendships with my peers, bonding over the struggles, challeneges, and long lab hours that we will share throughout the semester.

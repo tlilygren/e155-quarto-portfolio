@@ -1,0 +1,3 @@
+# E155 Resources
+All course-provided materials to aid with the completion of each lab:   
+    1. [E155 Class Website](https://hmc-e155.github.io/)

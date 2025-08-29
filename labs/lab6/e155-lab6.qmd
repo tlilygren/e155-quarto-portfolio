@@ -1,0 +1,7 @@
+---
+title: "Lab 6: The Internet of Things and Serial Peripheral Interface"
+description: "Lab 6 description"
+author: "Thomas Lilygren"
+date: "10/6/25"
+draft: false
+---

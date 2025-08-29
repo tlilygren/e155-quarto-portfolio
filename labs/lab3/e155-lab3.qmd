@@ -1,0 +1,7 @@
+---
+title: "Lab 3: Keypad Scanner"
+description: "Lab 3 description"
+author: "Thomas Lilygren"
+date: "9/15/25"
+draft: false
+---
