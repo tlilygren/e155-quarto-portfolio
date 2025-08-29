@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "E155 Blogs",
+    "section": "",
+    "text": "Goals for MicroPs\n\n\nHere I outline why I enrolled in E155 and what I hope to gain from my experience.\n\n\n\n\n\nAug 29, 2025\n\n\nThomas Lilygren\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
+    "section": "",
+    "text": "Thomas Lilygren is a senior engineering major at Harvey Mudd College with a keen interest in electrical and systems engineering. His career aspirations involve combining his electrical engineering skills with his business internship experience and economics concentration through the development of his own business. In his free time, he enjoys golfing, climbing, and reading philosophy. Join him on his journey as he explores the fascinating and expansive world of microprocessor design!"
+  },
+  {
+    "objectID": "posts/first-post.html",
+    "href": "posts/first-post.html",
+    "title": "Goals for MicroPs",
+    "section": "",
+    "text": "I remember wanting to take MicroPs before I even declared as an engineering major. Not only because the projects from previous cohorts left me in awe, but also because each person I talked to described this as one of their most rewarding experiences. E155 explores so many facets of digital and hardware design and instills coveted skills that apply to all realms of engineering. I hope to use this opportunity to push myself beyond the limits I untinentionally impose on myself and embrace the uncertainty that comes along with the rigorous curriculum. I aspire to learn the techniques, time management, decision-making skills, and debugging practices that industry experts employ on a day-to-day basis. On top of this, I hope to forge new friendships with my peers, bonding over the struggles, challeneges, and long lab hours that we will share throughout the semester."
+  },
+  {
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nLab 2 description\n\n\n\nLab 3 description\n\n\n\nLab 4 description\n\n\n\nLab 5 description\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
+  },
+  {
+    "objectID": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
+    "href": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog."
+  },
+  {
+    "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
+    "href": "labs.html#lab-2-multiplexed-7-segment-display",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 2 description"
+  },
+  {
+    "objectID": "labs.html#lab-3-keypad-scanner",
+    "href": "labs.html#lab-3-keypad-scanner",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 3 description"
+  },
+  {
+    "objectID": "labs.html#lab-4-digital-audio",
+    "href": "labs.html#lab-4-digital-audio",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 4 description"
+  },
+  {
+    "objectID": "labs.html#lab-5-interrupts",
+    "href": "labs.html#lab-5-interrupts",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 5 description"
+  },
+  {
+    "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
+    "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 6 description"
+  },
+  {
+    "objectID": "labs.html#lab-7-the-advanced-encryption-standard",
+    "href": "labs.html#lab-7-the-advanced-encryption-standard",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 7 description"
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "E155 Resources",
+    "section": "",
+    "text": "E155 Resources\nAll course-provided materials to aid with the completion of each lab:\n1. E155 Class Website"
+  }
+]
