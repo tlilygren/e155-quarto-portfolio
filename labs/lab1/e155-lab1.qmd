@@ -61,7 +61,7 @@ Figure 4 shows the inputs, outputs, and flow of the seven segment display module
 ### Schematic
 Figure 5 displays the electrical schematic for the three on-board LEDs using the correct resistor values established in Figure 2.  
 
-![Figure 5: The electrical schematic for the on-board LEDs to ensure proper illuminesence without extreme current draw](images/leds_eschem_new_new.jpg)
+![Figure 5: The electrical schematic for the on-board LEDs to ensure proper illuminesence without extreme current draw](images/leds_eschem_NEW.jpg)
 
 Figure 6 presents the electrical schematic for the seven-segment display with the proper resistor values determined in Figure 2. The GPIO pins each segment is connected to can act as a power source or a ground.  
 
