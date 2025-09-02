@@ -1,0 +1,18 @@
+---
+title: "Lab 1 Reflection"
+description: "Here I outline my reflections on the first lab of E155"
+author: "Thomas Lilygren"
+date: "9/2/25"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+This lab was a good introduction into E155 and the work and dedication that these labs require. I spent the first few days 
+getting my bearings and figuring out how to solder SMT connections and parse through the lab manual in a constructive way. 
+There were many times where I felt like I was in over my head, but working with others and collaboration made this lab very 
+informative and fun. I feel that I can use the Lattice and Questa software comfortably, which should help a lot in subsequent
+labs. I got closer with my peers and gained confidence that will at least carry me through the next week. I did not do the best
+job planning out my work, as I spent most of my time on this lab rather than other commitments. Going into Lab 2, 
+I hope to establish a better plan, utilize grutoring hours more, and maintain more balance with my workload and social 
+commitments.

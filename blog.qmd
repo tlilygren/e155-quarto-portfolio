@@ -1,8 +1,7 @@
----
-title: "E155 Blogs"
-listing:
-    contents: posts
-    sort: "date desc"
-    type: default
-    categories: false
----
+# E155 Blogs
+
+## [Reflection 0: Goals for MicroPs](posts/first-post.qmd)
+Here I outline why I enrolled in E155 and what I hope to gain from my experience.
+
+## [Reflection Lab 1: FPGA and MCU Setup and Testing](posts/lab-1-reflection.qmd)
+Here I reflect on the struggles and successes that defined my first lab in E155.
