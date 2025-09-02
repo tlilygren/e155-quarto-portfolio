@@ -61,11 +61,11 @@ Figure 4 shows the inputs, outputs, and flow of the seven segment display module
 ### Schematic
 Figure 5 displays the electrical schematic for the three on-board LEDs using the correct resistor values established in Figure 2.  
 
-![Figure 5: The electrical schematic for the on-board LEDs to ensure proper illuminesence without extreme current draw](images/led_eschem_new.jpg)
+![Figure 5: The electrical schematic for the on-board LEDs to ensure proper illuminesence without extreme current draw](images/leds_eschem_new_new.jpg)
 
 Figure 6 presents the electrical schematic for the seven-segment display with the proper resistor values determined in Figure 2. The GPIO pins each segment is connected to can act as a power source or a ground.  
 
-![Figure 6: The electrical schematic for the external seven-segment display to ensure proper illuminesence without extreme current draw](images/7_seg_eschem_new.jpg)
+![Figure 6: The electrical schematic for the external seven-segment display to ensure proper illuminesence without extreme current draw](images/7seg_eschem_new_new.jpg)
 
 ## Results and Discussion
 Figure 7 shows the waveforms from the top module. The first line shows the clock cycles, the second highlights the reset state, and the third describes the switch inputs. Notice the switch inputs contain all possible hexadecimal digits that should be displayed on the segments. Since led[2] oscillates at the same frequency regardless of the input values, that component was confirmed separately with the oscilloscope image in Figure 9.
@@ -81,7 +81,7 @@ Figure 9 outlines the periodic square wave influenced by the oscillating LED. Us
 ![Figure 9: This oscilloscope image reveals led[2] oscillating at the desired 2.4 Hz, indicating proper division of the high-speed oscillator.](images/led2.jpg)
 
 ## Conclusion
-The simulations and hardware implementations show that this lab was successful in all regards. The LEDs activated and behaved in their expected manner and the seven-segment display showed all hexadecimal digits when expected. The lab took roughly 25 hours to complete
+The simulations and hardware implementations show that this lab was successful in all regards. The LEDs activated and behaved in their expected manner and the seven-segment display showed all hexadecimal digits when expected. The lab took roughly 25 hours to complete.
 
 ## AI Prototype Summary
 The power of AI continues to grow by the day and may be a useful tool when programming hardware such as the code developed in this Lab. To test the efficacy and reliability of its capabilities, the following prompt was entered into ChatGPT and synthesized in the Radiant software: "Write SystemVerilog HDL to leverage the internal high speed oscillator in the Lattice UP5K FPGA and blink an LED at 2 Hz. Take full advantage of SystemVerilog syntax, for example, using logic instead of wire and reg."
