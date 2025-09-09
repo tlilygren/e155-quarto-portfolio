@@ -25,7 +25,7 @@ The maximum allowed current sink for the FPGA GPIO switch pins is 8 mA according
 
 The seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA's GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Figure 2 below.
 
-![Figure 2: Seven-Segment Display current calculations](images/lab2_7seg_calcs.jpg)
+![Figure 2: Seven-Segment Display current calculations](images/lab2_sevenseg_calc_USE.jpg)
 
 The five external LEDs were green, meaning they each had a voltage drop of around 1.8 V. Sufficient luminescence is obtained with a current of around 7-10 mA. Understanding that the input voltage from the FPGA is 3.3 V, Ohm's Law was used to find the satisfactory resistor value of 200 Ohms. This calculation can be found below in Figure 3.
 
@@ -44,7 +44,7 @@ The multiplexer modules instantiates the HSOSC and implements the counter for cl
 ### Electronic Schematics
 To ensure all segments are equally illuminated, the segments are wired in parallel to each other, and each is wired in series with a 470 Ohm resistor to limit the current through the display and sunk into the FPGA. The two displays share common pin functions, meaning that counterparts are connected together and fed to the same GPIO.
 
-![Figure 6: Seven-Segment Display electronic schematic](images/lab2_7seg_block_NEW_NEW.jpg)
+![Figure 6: Seven-Segment Display electronic schematic](images/lab2_sevenseg_schem_USE.jpg)
 
 The five green external LEDs are powered with the FPGA based on the summation logic implemented in the leds module. Each diode is wired in series with a 200 Ohm current-limiting resistor and fed to ground. These resistors allow 7 mA of current to flow through each LED, which makes it sufficiently bright when on.
 
