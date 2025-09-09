@@ -35,6 +35,13 @@
     "text": "I remember wanting to take MicroPs before I even declared as an engineering major. Not only because the projects from previous cohorts left me in awe, but also because each person I talked to described this as one of their most rewarding experiences. E155 explores so many facets of digital and hardware design and instills coveted skills that apply to all realms of engineering. I hope to use this opportunity to push myself beyond the limits I untinentionally impose on myself and embrace the uncertainty that comes along with the rigorous curriculum. I aspire to learn the techniques, time management, decision-making skills, and debugging practices that industry experts employ on a day-to-day basis. On top of this, I hope to forge new friendships with my peers, bonding over the struggles, challeneges, and long lab hours that we will share throughout the semester."
   },
   {
+    "objectID": "posts/lab-1-reflection.html",
+    "href": "posts/lab-1-reflection.html",
+    "title": "Lab 1 Reflection",
+    "section": "",
+    "text": "This lab was a good introduction into E155 and the work and dedication that these labs require. I spent the first few days getting my bearings and figuring out how to solder SMT connections and parse through the lab manual in a constructive way. There were many times where I felt like I was in over my head, but working with others and collaboration made this lab very informative and fun. I feel that I can use the Lattice and Questa software comfortably, which should help a lot in subsequent labs. I got closer with my peers and gained confidence that will at least carry me through the next week. I did not do the best job planning out my work, as I spent most of my time on this lab rather than other commitments. Going into Lab 2, I hope to establish a better plan, utilize grutoring hours more, and maintain more balance with my workload and social commitments."
+  },
+  {
     "objectID": "labs/lab1/e155-lab1.html",
     "href": "labs/lab1/e155-lab1.html",
     "title": "Lab 1: FPGA and MCU Testing and Setup",
@@ -84,11 +91,67 @@
     "text": "AI Prototype Summary\nThe power of AI continues to grow by the day and may be a useful tool when programming hardware such as the code developed in this Lab. To test the efficacy and reliability of its capabilities, the following prompt was entered into ChatGPT and synthesized in the Radiant software: “Write SystemVerilog HDL to leverage the internal high speed oscillator in the Lattice UP5K FPGA and blink an LED at 2 Hz. Take full advantage of SystemVerilog syntax, for example, using logic instead of wire and reg.”\n\n\n\nFigure 10: Initial ChatGPT request with the prompt above\n\n\nAfter the initial request, ChatGPT’s code yielded a 35901063 error, meaning that it did not instantiate the high-frequency oscillator.\n\n\n\nFigure 11: ChatGPT rewrite after listing the code above.\n\n\nAfter the first revision a new error code, 1025000, appeared. This means that the parameter “CLKHF_DIV” was not defined in the module.\n\n\n\nFigure 12: ChatGPT second rewrite\n\n\nA new error (35811103) appeared. Lattice stated that it could not resolve blackbox module “SB_HFOSC” in the device.\nA few more subsequent attempts were prompted, but the design continuously could not synthesize. According to this trial, ChatGPT still has a long way to go before it can reliably program hardware."
   },
   {
-    "objectID": "posts/lab-1-reflection.html",
-    "href": "posts/lab-1-reflection.html",
-    "title": "Lab 1 Reflection",
+    "objectID": "labs/lab2/e155-lab2.html",
+    "href": "labs/lab2/e155-lab2.html",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
     "section": "",
-    "text": "This lab was a good introduction into E155 and the work and dedication that these labs require. I spent the first few days getting my bearings and figuring out how to solder SMT connections and parse through the lab manual in a constructive way. There were many times where I felt like I was in over my head, but working with others and collaboration made this lab very informative and fun. I feel that I can use the Lattice and Questa software comfortably, which should help a lot in subsequent labs. I got closer with my peers and gained confidence that will at least carry me through the next week. I did not do the best job planning out my work, as I spent most of my time on this lab rather than other commitments. Going into Lab 2, I hope to establish a better plan, utilize grutoring hours more, and maintain more balance with my workload and social commitments."
+    "text": "In this lab, a time-multiplexer was programmed onto the E155 iCE40 UltraPlus FPGA board with SystemVerilog to control two independent seven-segment displays connected to the same GPIO pins. The displays were capable of showcasing each of the sixteen hexadecimal digits (0-F), and their sum was represented by five external LEDs. This lab introduces a new form of multiplexing and emphasizes the ability to control multiple components with a limited number of available GPIO connections."
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#introduction",
+    "href": "labs/lab2/e155-lab2.html#introduction",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "",
+    "text": "In this lab, a time-multiplexer was programmed onto the E155 iCE40 UltraPlus FPGA board with SystemVerilog to control two independent seven-segment displays connected to the same GPIO pins. The displays were capable of showcasing each of the sixteen hexadecimal digits (0-F), and their sum was represented by five external LEDs. This lab introduces a new form of multiplexing and emphasizes the ability to control multiple components with a limited number of available GPIO connections."
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#design-and-testing",
+    "href": "labs/lab2/e155-lab2.html#design-and-testing",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Design and Testing",
+    "text": "Design and Testing\nThe independent seven-segment displays were controlled with two four-input DIP switches, which acted as the inputs to the time multiplexer. A clock frequency was generated with the 24 MHz internal high-speed oscillator, which employed an eighteen-bit counter to divide it to a reasonable frequency. This frequency was tailored to prevent bleeding and flickering within the displays while still allowing them to appear simultaneously. With a small degree of trial and error, a frequency of 120 Hz was found to satisfy these display conditions. The 120 Hz modified clock frequency acted as the enable to the multiplexer: when the clock enable was low, it would pass the input logic from the DIP switch controlling the first display, and when high, it would pass the logic from the DIP switch controlling the second. Two PNP transistors behaved as gates that controlled when each display received power: the emitter pins received 3.3 V supplied by the FPGA, the base pins were connected to the GPIO pins on the FPGA with a 1 kOhm resistor in wired in series, and the collector pins were connected to the common anodes on the seven-segment displays.\nThe seven-segment displays shared a common layout, meaning that the pins the controlling corresponding segments were connected to the same GPIOs with a 470 kOhm resistor wired in series with them. These resistors not only limited the current running through each segment, but also protected the FPGA pins which acted as a ground. The two four-input DIP switches also controlled five external green LEDs implemented on the breadboard design. The five LEDs received power from five separate GPIO pins on the FPGA and were wired in series with 200 Ohm resistors to limit their current draw. The LEDs illuminated to showcase the binary sum of the DIP switch positions, and by extension, the sum of the two hexadecimal digits shown on the seven-segment displays.\nCalculations for resistor connected to the base pins of the PNP transistors are shown in Figure 1, while the calculations to limit the current draw of the seven-segment displays and the external LEDs can be found in Figures 2 and 3, respectively.\nThe source code for this lab can be found at this Github Repository."
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#calculations",
+    "href": "labs/lab2/e155-lab2.html#calculations",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Calculations",
+    "text": "Calculations\n\n\n\nFigure 1: PNP transistor calculation\n\n\nThe seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA’s GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Figure 2 below.\n\n\n\nFigure 2: Seven-Segment Display current calculations\n\n\nThe five external LEDs were green, meaning they each had a voltage drop of around 1.8 V. Sufficient luminescence is obtained with a current of around 7-10 mA. Understanding that the input voltage from the FPGA is 3.3 V, Ohm’s Law was used to find the satisfactory resistor value of 200 Ohms. This calculation can be found below in Figure 3.\n\n\n\nFigure 3: External LED current calculations"
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#technical-documentation",
+    "href": "labs/lab2/e155-lab2.html#technical-documentation",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\n\nBlock Diagrams\nThe SystemVerilog code to complete the lab deliverables were separated into three modules: one describing the multiplexer logic, another implementing the seven-segment logic from the DIP switch positions, and a third executing the addition for the external LED display. All modules were called in the comprehensive top module outlined below.\n\n\n\nFigure 4: Top module block diagram\n\n\nThe multiplexer modules instantiates the HSOSC and implements the counter for clock division. Within the module, the enable bit, oscillating at the same frequency as the 120 Hz clock, is fed into a mux established with a ternary operator. The mux receives the two DIP switch inputs, and depending on this enable value, passes one of those two inputs to the output.\n\n\n\nFigure 5: Multiplexer module block diagram\n\n\n\n\nElectronic Schematics\nTo ensure all segments are equally illuminated, the segments are wired in parallel to each other, and each is wired in series with a 470 Ohm resistor to limit the current through the display and sunk into the FPGA. The two displays share common pin functions, meaning that counterparts are connected together and fed to the same GPIO.\n\n\n\nFigure 6: Seven-Segment Display electronic schematic\n\n\nThe five green external LEDs are powered with the FPGA based on the summation logic implemented in the leds module. Each diode is wired in series with a 200 Ohm current-limiting resistor and fed to ground. These resistors allow 7 mA of current to flow through each LED, which makes it sufficiently bright when on.\n\n\n\nFigure 7: External LEDs electronic schematic"
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#results-and-discussion",
+    "href": "labs/lab2/e155-lab2.html#results-and-discussion",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe external LEDs were confirmed to output the proper binary value through a waveform simulation. All possible switch input combinations were tested and the output sum is present in the waveforms in Figure 8. The two DIP switches were powered low, meaning their bits must be inverted before taking their sum.\n\n\n\nFigure 8: LEDs module waveforms\n\n\nFigure 9 shows a zoomed-in portion of the LED waveforms in Figure 8. This image allows a closer look into the output (led) values at given switch input values.\n\n\n\nFigure 9: LEDs module waveforms zoomed-in\n\n\nThe seven-segment waveforms in Figure 10 are similar to the waveforms showcased in lab 1. Here, the seg outputs and seg_expected outputs are outlined in the same wave signals. Throughout the entire simulation, it is clear that seg is equal to seg_expected, as desired.\n\n\n\nFigure 10: Seven-segment waveforms\n\n\nThe multiplexer module waveforms in Figure 11 were implemented with a nested for loop and assert statements. The simulation duration was lengthy, but the logic and behavior remains consistent.\n\n\n\nFigure 11: Multiplexer waveforms\n\n\nFigure 12, shows a zoomed-in segment of the multiplexer waves in Figure 11. This wave shows that as the multiplexer enable oscillates between zero and one with the modified clock frequency, the output value alternates between the first and second switch values. The nested for loop allows for all possible switch combinations to be tested and confirmed.\n\n\n\nFigure 12: Multiplexer waveforms zoomed-in"
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#conclusion",
+    "href": "labs/lab2/e155-lab2.html#conclusion",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis simulation waveforms paired with the successful hardware implementation indicate that this lab successfully met all design requirements. The displays successfully employ time-multiplexing, show the independent hexadecimal digits simultaneously, and the LEDs show the proper sum of those digits. In all, this lab took roughly 25 hours to complete."
+  },
+  {
+    "objectID": "labs/lab2/e155-lab2.html#ai-prototype",
+    "href": "labs/lab2/e155-lab2.html#ai-prototype",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "AI Prototype",
+    "text": "AI Prototype\nChatGPT’s hardware design for the first lab failed after multiple prompts and updates with Lattice Radiant’s error codes. Here, its capabilities are tested again with the following prompt: “Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits.”\n\n\n\nFigure 13: Initial prompt to ChatGPT\n\n\nUnlike last, ChatGPT developed hardware code that synthesized in Lattice Radiant on the first try without any reference code from lab 1. It appears that ChatGPT’s ability to program hardware is improving. Still, its capabilities will be tested when it has a base script to refer to with the following prompt: “Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits. Use the seven segment decoder and oscillator provided in the attached files.”\n\n\n\nFigure 14: ChatGPT prompt with lab 1 reference code\n\n\nAfter providing reference code from lab 1, ChatGPT ran into its first error in that it called a seven-segment display module that it did not create. Once prompted to create the seven-segment display module, it copied the code in the module it had been provided and Lattice Synthesized the project without issue.\nIt is clear that ChatGPT is gaining traction with hardware design and programming whether receiving help with working code or not. Instead of using the ternary operator for a multiplexer, ChatGPT opts for a case statement, which behaves the same, but is less elegant. The AI also uses different instances of variables when calling the seven-segment display module. For example, instead of using “sevensegment display(s, seg),” it uses “sevensegment display(.s(current_intput), .seg(seg)).” The code appears to behave the same, but I prefer my implementation over ChatGPT’s."
+  },
+  {
+    "objectID": "posts/lab-2-reflection.html",
+    "href": "posts/lab-2-reflection.html",
+    "title": "Lab 2 Reflection",
+    "section": "",
+    "text": "I felt more prepared for this lab compared to the last. I think the last lab helped me set expectations for what to expect for this lab and how to plan my time. I"
   },
   {
     "objectID": "labs.html",

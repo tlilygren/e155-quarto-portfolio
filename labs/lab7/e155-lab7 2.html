@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Thomas Lilygren">
-<meta name="dcterms.date" content="2025-09-09">
-<meta name="description" content="This lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits">
+<meta name="dcterms.date" content="2025-10-13">
+<meta name="description" content="Lab 7 description">
 
-<title>Lab 2: Multiplexed 7-Segment Display – E155 Portfolio</title>
+<title>Lab 7: The Advanced Encryption Standard – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,36 +119,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a></li>
-  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
-  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
-  <ul class="collapse">
-  <li><a href="#block-diagrams" id="toc-block-diagrams" class="nav-link" data-scroll-target="#block-diagrams">Block Diagrams</a></li>
-  <li><a href="#electronic-schematics" id="toc-electronic-schematics" class="nav-link" data-scroll-target="#electronic-schematics">Electronic Schematics</a></li>
-  </ul></li>
-  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#ai-prototype" id="toc-ai-prototype" class="nav-link" data-scroll-target="#ai-prototype">AI Prototype</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 2: Multiplexed 7-Segment Display</h1>
-</div>
+<h1 class="title">Lab 7: The Advanced Encryption Standard</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Reflection</div>
+    <div class="quarto-category">Lab Report</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    This lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits
+    Lab 7 description
   </div>
 </div>
 
@@ -165,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 9, 2025</p>
+      <p class="date">October 13, 2025</p>
     </div>
   </div>
   
@@ -177,140 +165,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this lab, a time-multiplexer was programmed onto the E155 iCE40 UltraPlus FPGA board with SystemVerilog to control two independent seven-segment displays connected to the same GPIO pins. The displays were capable of showcasing each of the sixteen hexadecimal digits (0-F), and their sum was represented by five external LEDs. This lab introduces a new form of multiplexing and emphasizes the ability to control multiple components with a limited number of available GPIO connections.</p>
-</section>
-<section id="design-and-testing" class="level2">
-<h2 class="anchored" data-anchor-id="design-and-testing">Design and Testing</h2>
-<p>The independent seven-segment displays were controlled with two four-input DIP switches, which acted as the inputs to the time multiplexer. A clock frequency was generated with the 24 MHz internal high-speed oscillator, which employed an eighteen-bit counter to divide it to a reasonable frequency. This frequency was tailored to prevent bleeding and flickering within the displays while still allowing them to appear simultaneously. With a small degree of trial and error, a frequency of 120 Hz was found to satisfy these display conditions. The 120 Hz modified clock frequency acted as the enable to the multiplexer: when the clock enable was low, it would pass the input logic from the DIP switch controlling the first display, and when high, it would pass the logic from the DIP switch controlling the second. Two PNP transistors behaved as gates that controlled when each display received power: the emitter pins received 3.3 V supplied by the FPGA, the base pins were connected to the GPIO pins on the FPGA with a 1 kOhm resistor in wired in series, and the collector pins were connected to the common anodes on the seven-segment displays.</p>
-<p>The seven-segment displays shared a common layout, meaning that the pins the controlling corresponding segments were connected to the same GPIOs with a 470 kOhm resistor wired in series with them. These resistors not only limited the current running through each segment, but also protected the FPGA pins which acted as a ground. The two four-input DIP switches also controlled five external green LEDs implemented on the breadboard design. The five LEDs received power from five separate GPIO pins on the FPGA and were wired in series with 200 Ohm resistors to limit their current draw. The LEDs illuminated to showcase the binary sum of the DIP switch positions, and by extension, the sum of the two hexadecimal digits shown on the seven-segment displays.</p>
-<p>Calculations for resistor connected to the base pins of the PNP transistors are shown in Figure 1, while the calculations to limit the current draw of the seven-segment displays and the external LEDs can be found in Figures 2 and 3, respectively.</p>
-<p>The source code for this lab can be found at this <a href="">Github Repository.</a></p>
-</section>
-<section id="calculations" class="level2">
-<h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src=".png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1: PNP transistor calculation</figcaption>
-</figure>
-</div>
-<p>The seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA’s GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Figure 2 below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_7seg_calcs.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 2: Seven-Segment Display current calculations</figcaption>
-</figure>
-</div>
-<p>The five external LEDs were green, meaning they each had a voltage drop of around 1.8 V. Sufficient luminescence is obtained with a current of around 7-10 mA. Understanding that the input voltage from the FPGA is 3.3 V, Ohm’s Law was used to find the satisfactory resistor value of 200 Ohms. This calculation can be found below in Figure 3.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_externalLED_calcs.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 3: External LED current calculations</figcaption>
-</figure>
-</div>
-</section>
-<section id="technical-documentation" class="level2">
-<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
-<section id="block-diagrams" class="level3">
-<h3 class="anchored" data-anchor-id="block-diagrams">Block Diagrams</h3>
-<p>The SystemVerilog code to complete the lab deliverables were separated into three modules: one describing the multiplexer logic, another implementing the seven-segment logic from the DIP switch positions, and a third executing the addition for the external LED display. All modules were called in the comprehensive top module outlined below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_topmodule_block_NEW.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 4: Top module block diagram</figcaption>
-</figure>
-</div>
-<p>The multiplexer modules instantiates the HSOSC and implements the counter for clock division. Within the module, the enable bit, oscillating at the same frequency as the 120 Hz clock, is fed into a mux established with a ternary operator. The mux receives the two DIP switch inputs, and depending on this enable value, passes one of those two inputs to the output.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_mux_block_NEW.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 5: Multiplexer module block diagram</figcaption>
-</figure>
-</div>
-</section>
-<section id="electronic-schematics" class="level3">
-<h3 class="anchored" data-anchor-id="electronic-schematics">Electronic Schematics</h3>
-<p>To ensure all segments are equally illuminated, the segments are wired in parallel to each other, and each is wired in series with a 470 Ohm resistor to limit the current through the display and sunk into the FPGA. The two displays share common pin functions, meaning that counterparts are connected together and fed to the same GPIO.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_7seg_block_NEW_NEW.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 6: Seven-Segment Display electronic schematic</figcaption>
-</figure>
-</div>
-<p>The five green external LEDs are powered with the FPGA based on the summation logic implemented in the leds module. Each diode is wired in series with a 200 Ohm current-limiting resistor and fed to ground. These resistors allow 7 mA of current to flow through each LED, which makes it sufficiently bright when on.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_externalLED_schematic.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 7: External LEDs electronic schematic</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="results-and-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
-<p>The external LEDs were confirmed to output the proper binary value through a waveform simulation. All possible switch input combinations were tested and the output sum is present in the waveforms in Figure 8. The two DIP switches were powered low, meaning their bits must be inverted before taking their sum.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_ledwaveforms_full.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 8: LEDs module waveforms</figcaption>
-</figure>
-</div>
-<p>Figure 9 shows a zoomed-in portion of the LED waveforms in Figure 8. This image allows a closer look into the output (led) values at given switch input values.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_ledwaveforms_zoom.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 9: LEDs module waveforms zoomed-in</figcaption>
-</figure>
-</div>
-<p>The seven-segment waveforms in Figure 10 are similar to the waveforms showcased in lab 1. Here, the seg outputs and seg_expected outputs are outlined in the same wave signals. Throughout the entire simulation, it is clear that seg is equal to seg_expected, as desired.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_7segwaveforms.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 10: Seven-segment waveforms</figcaption>
-</figure>
-</div>
-<p>The multiplexer module waveforms in Figure 11 were implemented with a nested for loop and assert statements. The simulation duration was lengthy, but the logic and behavior remains consistent.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_muxwaveforms_full.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Figure 11: Multiplexer waveforms</figcaption>
-</figure>
-</div>
-<p>Figure 12, shows a zoomed-in segment of the multiplexer waves in Figure 11. This wave shows that as the multiplexer enable oscillates between zero and one with the modified clock frequency, the output value alternates between the first and second switch values. The nested for loop allows for all possible switch combinations to be tested and confirmed.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_muxwaveforms_zoom.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 12: Multiplexer waveforms zoomed-in</figcaption>
-</figure>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>This simulation waveforms paired with the successful hardware implementation indicate that this lab successfully met all design requirements. The displays successfully employ time-multiplexing, show the independent hexadecimal digits simultaneously, and the LEDs show the proper sum of those digits. In all, this lab took roughly 25 hours to complete.</p>
-</section>
-<section id="ai-prototype" class="level2">
-<h2 class="anchored" data-anchor-id="ai-prototype">AI Prototype</h2>
-<p>ChatGPT’s hardware design for the first lab failed after multiple prompts and updates with Lattice Radiant’s error codes. Here, its capabilities are tested again with the following prompt: “Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits.”</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_ai_nohelp.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 13: Initial prompt to ChatGPT</figcaption>
-</figure>
-</div>
-<p>Unlike last, ChatGPT developed hardware code that synthesized in Lattice Radiant on the first try without any reference code from lab 1. It appears that ChatGPT’s ability to program hardware is improving. Still, its capabilities will be tested when it has a base script to refer to with the following prompt: “Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits. Use the seven segment decoder and oscillator provided in the attached files.”</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_ai_reference.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 14: ChatGPT prompt with lab 1 reference code</figcaption>
-</figure>
-</div>
-<p>After providing reference code from lab 1, ChatGPT ran into its first error in that it called a seven-segment display module that it did not create. Once prompted to create the seven-segment display module, it copied the code in the module it had been provided and Lattice Synthesized the project without issue.</p>
-<p>It is clear that ChatGPT is gaining traction with hardware design and programming whether receiving help with working code or not. Instead of using the ternary operator for a multiplexer, ChatGPT opts for a case statement, which behaves the same, but is less elegant. The AI also uses different instances of variables when calling the seven-segment display module. For example, instead of using “sevensegment display(s, seg),” it uses “sevensegment display(.s(current_intput), .seg(seg)).” The code appears to behave the same, but I prefer my implementation over ChatGPT’s.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
