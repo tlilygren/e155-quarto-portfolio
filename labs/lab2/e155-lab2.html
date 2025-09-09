@@ -200,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA’s GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Figure 2 below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/lab2_7seg_calcs.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/lab2_sevenseg_calc_USE.jpg" class="img-fluid figure-img"></p>
 <figcaption>Figure 2: Seven-Segment Display current calculations</figcaption>
 </figure>
 </div>
@@ -236,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 <p>To ensure all segments are equally illuminated, the segments are wired in parallel to each other, and each is wired in series with a 470 Ohm resistor to limit the current through the display and sunk into the FPGA. The two displays share common pin functions, meaning that counterparts are connected together and fed to the same GPIO.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/lab2_7seg_block_NEW_NEW.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/lab2_sevenseg_schem_USE.jpg" class="img-fluid figure-img"></p>
 <figcaption>Figure 6: Seven-Segment Display electronic schematic</figcaption>
 </figure>
 </div>
