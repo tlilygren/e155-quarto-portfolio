@@ -4,7 +4,7 @@
 Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog. 
 
 ## [Lab 2: Multiplexed 7-Segment Display](labs/lab2/e155-lab2.qmd)
-Lab 2 description
+This lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits
 
 ## [Lab 3: Keypad Scanner](labs/lab3/e155-lab3.qmd)
 Lab 3 description

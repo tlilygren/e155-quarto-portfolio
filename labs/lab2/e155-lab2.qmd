@@ -16,12 +16,12 @@ The seven-segment displays shared a common layout, meaning that the pins the con
 
 Calculations for resistor connected to the base pins of the PNP transistors are shown in Figure 1, while the calculations to limit the current draw of the seven-segment displays and the external LEDs can be found in Figures 2 and 3, respectively. 
 
-The source code for this lab can be found at this [Github Repository.]()
+The source code for this lab can be found at this [Github Repository.](https://github.com/tlilygren/e155-lab2/tree/main)
 
 ## Calculations
+The maximum allowed current sink for the FPGA GPIO switch pins is 8 mA according to the iCE40 UltraPlus 5K datasheet. Using this knowledge along with the known 3.3 V supply entering the emitter pin and known 0.7 V drop between the emitter and base pin, the resistor in series with the 2N3906 PNP transistor's base pin and the FPGA can be calculated with the formula in Figure 1. Aiming for a current gain of 10, the voltage sinking in the FPGA should be 0.8 mA, well below the established threshold.
 
-
-![Figure 1: PNP transistor calculation]()
+![Figure 1: PNP base transistor calculation](images/lab2_pnp_calc.jpg)
 
 The seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA's GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Figure 2 below.
 
