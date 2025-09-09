@@ -1,0 +1,12 @@
+---
+title: "Lab 2 Reflection"
+description: "Here I reflect on my E155 lab 2 experience and my growth since lab 1"
+author: "Thomas Lilygren"
+date: "9/9/25"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+I felt more prepared for this lab compared to the last. I think the last lab helped me set expectations for what to expect for this lab and how to plan my time. I 
