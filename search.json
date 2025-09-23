@@ -42,6 +42,62 @@
     "text": "This lab was a good introduction into E155 and the work and dedication that these labs require. I spent the first few days getting my bearings and figuring out how to solder SMT connections and parse through the lab manual in a constructive way. There were many times where I felt like I was in over my head, but working with others and collaboration made this lab very informative and fun. I feel that I can use the Lattice and Questa software comfortably, which should help a lot in subsequent labs. I got closer with my peers and gained confidence that will at least carry me through the next week. I did not do the best job planning out my work, as I spent most of my time on this lab rather than other commitments. Going into Lab 2, I hope to establish a better plan, utilize grutoring hours more, and maintain more balance with my workload and social commitments."
   },
   {
+    "objectID": "labs/lab3/e155-lab3.html",
+    "href": "labs/lab3/e155-lab3.html",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "",
+    "text": "In Lab 3, a 4x4 keypad scanner is encoded in SystemVerilog to showcase two hexadecimal digits on a dual seven-segment display. The lab focuses on addressing issues like metastability from asynchronous inputs and button debouncing, while building on concepts from lab 2 like time-multiplexing and driving like outputs with the same GPIO pins."
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#introduction",
+    "href": "labs/lab3/e155-lab3.html#introduction",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "",
+    "text": "In Lab 3, a 4x4 keypad scanner is encoded in SystemVerilog to showcase two hexadecimal digits on a dual seven-segment display. The lab focuses on addressing issues like metastability from asynchronous inputs and button debouncing, while building on concepts from lab 2 like time-multiplexing and driving like outputs with the same GPIO pins."
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#design-and-testing",
+    "href": "labs/lab3/e155-lab3.html#design-and-testing",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Design and Testing",
+    "text": "Design and Testing\nA comprehensive finite state machine serves as the backbone for this lab, and it must be thoroughly understood before implementing any hardware code. This 21-state finite state machine initializes row, column, and enable values, conducts a scanning process to find the key pressed, calls on a separate debouncer finite state machine, controls the display logic, and only one value is recorded regardless of how long a key is pressed. A detailed state transition diagram for this main finite state machine can be found in Figure 1.\nThe keypad scanner itself has no inherent power or ground pins. To bypass this initial hurdle, all rows are initially driven low (powered) while all columns set high with 10 kOhm pull-up resistors embedded in this iCE40UP 5K FPGA board. After this initialization step, the main finite state machine begins the scanning process, powering one row at a time and reading the column behavior. When a button is pressed, it shorts the corresponding row and column that it intersects. If one column remains low for a given powered row, the FSM skips over the rest of the scanning states and enters a debouncing state designated for that particular row. Otherwise, the scanning process continues, setting the next row low and checking the same column condition.\nAfter the scanning portion of the main FSM, it branches into four different paths, one for each of the possible rows that could be shorting one of the columns. These debouncing states activate a debounce enable variable and call on a separate module that implements a counter to delay the key registration process by roughly 20 ms. Buttons are subject to a bouncing phenomenon in which multiple button presses may register even though the user only physically presses it once. Without accounting for this behavior, the same value would appear multiple times on the dual seven-segment display, even though that is not what the user intended. This 20 ms delay is sufficient to eliminate debouncing without prompting the user to hold the button for too long.\nAfter passing through the debouncing states, the FSM moves on to the next states that check whether or not the button is still pressed. The key must be held throughout the debouncing stage to formally register the key value to be displayed. This state toggles a display enable variable that allows a formalized key value, generated from the unique row and column combination, to pass through a time-multiplexer and appear on the dual seven-segment display. The multiplexer ensures that the most recent digit appears on the right side of the display and previous digit to appear on the left.\nOnce the display behavior is settled, the FSM moves to the next states that check whether the key is still pressed. If the key is still pressed, it must remain in that state before returning to the initial state to ensure that multiple instances of that key do not keep cycling through the FSM and that any other auxilary button presses do not interfere with the value that should be displayed.\nThe clock signal driving the entire process is derived from the internal 24 MHz High-Speed Oscillator (HSOSC). A counter was implemented to divide the clock to 120 Hz. This new clock frequency is fast enough such that both displays\n\nFinite State Machines\nThe main finite state machine reads the columns and determines whether that it is a valid input, meaning that only one button is pressed at a time. States 1 through 4 implement a scanner that drives one of the four rows low at a time. These scanning states split the FSM into four branches, one for each of the four possible row bits that cause any of the columns to short. The FSM controls a debounce enable variable that controls when the debounce module is active, a display enable variable the directs when the key value can be displayed, and an internal “pressed” variable that remains when there is a valid input. It also receives a “time passed” variable from the debounce module that indicates whether or not the debounce delay has passed.\n\n\n\nFigure 1: Main State Transition Diagram"
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#calculations",
+    "href": "labs/lab3/e155-lab3.html#calculations",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Calculations",
+    "text": "Calculations\nLike the last lab, the power for the dual seven-segment display is controlled with a 2N3906 PNP transistor that behaves as a switch. To preserve the FPGA’s GPIO pin functionality, the current sunk by the PNP base pin should be less than 8 mA. With a known 3.3 V emitter voltage, 0.7 V emitter to base voltage drop, and a desired current gain of 10, Ohms Law can be applied to determine the ideal resistor value.\n\n\n\nFigure 2: PNP Base Resistor Calculations\n\n\nEach segment in the dual display has a forward voltage of 1.8 V. The supplied voltage from the FPGA is 3.3 V and the saturated emitter to collector voltage drop from the transistor is 0.25 V. A current between 1 mA to 8 mA is sufficient to illuminate the LEDs while still protecting the GPIO pins. Using this knowledge, a current-limiting resistor can be calculated with Ohm’s Law, as shown in Figure 4.\n\n\n\nFigure 3: Seven-Segment Display Resistor Calculations"
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#technical-documentation",
+    "href": "labs/lab3/e155-lab3.html#technical-documentation",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\n\nBlock Diagrams\nThe completion of this lab involved five separate modules: a top-level module that instantiates the clock and calls all submodules, the main FSM that controls the button logic, a debounce module, a multiplexer module the controls which of the two displays receives the digit, and a seven-segment decoder module that receives the key value and generates the corresponding digit. The interactions between each of these modules is illustrated in Figure 5.\n\n\n\nFigure 4: Top Module Block Diagram\n\n\n\n\nElectrical Schematics\nThe two displays share common outputs. Each corresponding output is fed to a 460 Ohm resistor. To ensure uniform illumination, each output pin pair is wired in parallel with the other output pairs. The current for each segment output is fed into an available GPIO pin on the FPGA board.\n\n\n\nFigure 5: Keypad Scanner and Seven-Segment Display Electrical Schematic"
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#results-and-discussion",
+    "href": "labs/lab3/e155-lab3.html#results-and-discussion",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThis lab proved to be moderately successful. Absent the synchronizing logic, the keypad successfully scans through all rows to generate the proper key value input. The 20 ms debounce logic requires the button to be pressed slightly longer for the output to fully register. While I could not properly implement the synchronization aspect of the lab, I believe that it is very possible to actually implement in the near future. The primary issue was that the synchronized columns would appear two clock cycles behind the rest of the logic, meaning the set row values would get stuck at specific values. By setting the rows high in one state, implementing a two-clock-cycle delay, and then scanning the synchronized columns, this issue could be solved as the rows and synchronized columns would follow the same timing. This would increase the duration for which the user must depress the button to ensure all necessary state register the button press to display the value."
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#conclusion",
+    "href": "labs/lab3/e155-lab3.html#conclusion",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis was a tough lab. Even over the course of two weeks and between 35-40 hours of work, timing issues from the synchronizer proved too difficult to overcome. Without the synchronizer the hardware implementation still works well, although there is more room for error and metastability. While the lab may be over, I will continue to work on this project in my free time to implement the synchronizer and expand my verification abilities by writing testbenches for all modules, although that should have been the step before hardware implementation."
+  },
+  {
+    "objectID": "labs/lab3/e155-lab3.html#ai-prototype",
+    "href": "labs/lab3/e155-lab3.html#ai-prototype",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "AI Prototype",
+    "text": "AI Prototype\nHere, we further test the capabilities of ChatGPT with hardware encoding. AI must generate code under three prompts, the first of which lists the requirements and formalities that E155 students received at the start of the lab. See the results in Figure 6.\n\n\n\nFigure 6: ChatGPT Code for First Prompt\n\n\nThis prompt yielded five modules that compiled within the first try. Impressive, yet a bit discouraging given how long this lab took me to respond. A further prompted was initiated and can be seen in Figure 7. This second approach requires ChatGPT to devlop code in piecemail, unlike the first prompt which required the LLM to provide all code at once.\n\n\n\nFigure 7: ChatGPT Code Results for Second Prompt\n\n\nWith the new prompt structure, ChatGPT implicitly called a seven segment display module that was stored in its memory from the first prompt. After pointing out this mistake and making ChatGPT rewrite its code, it fully compiled. While ChatGPT may have done this lab exponentially faster than me, it had more warnings (15) than me (11). I guess a little elbow grease was all the difference."
+  },
+  {
     "objectID": "labs/lab1/e155-lab1.html",
     "href": "labs/lab1/e155-lab1.html",
     "title": "Lab 1: FPGA and MCU Testing and Setup",
@@ -158,7 +214,7 @@
     "href": "labs.html",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 description\n\n\n\nLab 4 description\n\n\n\nLab 5 description\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 description\n\n\n\nLab 5 description\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
   },
   {
     "objectID": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
@@ -179,7 +235,7 @@
     "href": "labs.html#lab-3-keypad-scanner",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 3 description"
+    "text": "Lab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display."
   },
   {
     "objectID": "labs.html#lab-4-digital-audio",
