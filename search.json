@@ -98,6 +98,62 @@
     "text": "AI Prototype\nHere, we further test the capabilities of ChatGPT with hardware encoding. AI must generate code under three prompts, the first of which lists the requirements and formalities that E155 students received at the start of the lab. See the results in Figure 6.\n\n\n\nFigure 6: ChatGPT Code for First Prompt\n\n\nThis prompt yielded five modules that compiled within the first try. Impressive, yet a bit discouraging given how long this lab took me to respond. A further prompted was initiated and can be seen in Figure 7. This second approach requires ChatGPT to devlop code in piecemail, unlike the first prompt which required the LLM to provide all code at once.\n\n\n\nFigure 7: ChatGPT Code Results for Second Prompt\n\n\nWith the new prompt structure, ChatGPT implicitly called a seven segment display module that was stored in its memory from the first prompt. After pointing out this mistake and making ChatGPT rewrite its code, it fully compiled. While ChatGPT may have done this lab exponentially faster than me, it had more warnings (15) than me (11). I guess a little elbow grease was all the difference."
   },
   {
+    "objectID": "labs/lab5/e155-lab5.html",
+    "href": "labs/lab5/e155-lab5.html",
+    "title": "Lab 5: Interrupts",
+    "section": "",
+    "text": "Lab 5 aims to measure the angular velocity and detect the direction of a spinning motor using two built-in quadrature sensors generating identical square wave signals offset by 90º. The STM32L432KCU MCU records the number of pulses input by the quadratures by generating interrupt signals that increase a counter variable without the MCU needing to constantly scan for these events. After each second, the counter tally is converted to angular velocity using dimensional analysis with specifications from the motor’s datasheet before being reset. By keeping track of the rising and falling edges for both quadratures, the motor’s direction can also be determined."
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#introduction",
+    "href": "labs/lab5/e155-lab5.html#introduction",
+    "title": "Lab 5: Interrupts",
+    "section": "",
+    "text": "Lab 5 aims to measure the angular velocity and detect the direction of a spinning motor using two built-in quadrature sensors generating identical square wave signals offset by 90º. The STM32L432KCU MCU records the number of pulses input by the quadratures by generating interrupt signals that increase a counter variable without the MCU needing to constantly scan for these events. After each second, the counter tally is converted to angular velocity using dimensional analysis with specifications from the motor’s datasheet before being reset. By keeping track of the rising and falling edges for both quadratures, the motor’s direction can also be determined."
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#design-and-testing",
+    "href": "labs/lab5/e155-lab5.html#design-and-testing",
+    "title": "Lab 5: Interrupts",
+    "section": "Design and Testing",
+    "text": "Design and Testing\nThe 25GA-370 DC Motor contains an encoder disk and two optical quadrature sensors, QA and QB. Both quadratures sensors generate identical square wave pulse trains, but the signal from QB is offset from the QA signal by 90 degrees. The signals from these sensors feed into the PA6 and PA8 pins on the MCU for QA and QB, respectively. The rising and falling edges for each signal generate and interrupts"
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#calculations",
+    "href": "labs/lab5/e155-lab5.html#calculations",
+    "title": "Lab 5: Interrupts",
+    "section": "Calculations",
+    "text": "Calculations\nThe interrupt configuration increments the counter by one at each rising and falling edge trigger for both quadrature pulses. The total count acheived after one second must be converted to angular velocity in revolutions per second. These interrupt signals increment the counter by four for each measured pulse, meaning a correcting factor of four must be applied to convert the variable from ticks to pulses. According to the motor’s datasheet, the motor has 408 pulses per revolution, which can then be used to get the desired velocity. Accuracy can be confirmed by checking the measured specs within the same datasheet.\n\n\n\nFigure 1: Motor Angular Velocity with a 10 V applied voltage"
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#technical-documentation",
+    "href": "labs/lab5/e155-lab5.html#technical-documentation",
+    "title": "Lab 5: Interrupts",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\n\nInterrupt Flowchart\nThe MCU continuosly operates in the while loop within the main function after configuring the GPIOs, the interrupts, and one-second timer. Within the while loop, the MCU waits for the timer overflow to inidicate 1 second has passed, and when that overflow flag rises, it converts the count value to angular velocity and prints both the velocity and direction. When the rising or falling edge of a quadrature pulse is detected, the MCU pauses its operations within the main function and jumps to the interrupt handler function. There, it resets interrupt flag, increases the counter, and measures the current and previous states of both quadratures to feed into an external comparator to get the motor’s direction. Once the interrupt is properly handled, it returns back to the main function and resumes operation from where it left off.\n\n\n\nFigure 2: Interrupt Flowchart\n\n\n\n\nElectric Schematic\nThe hardware layout for this lab was relatively simple. The motor housed six total connections: an external power supply and ground, two quadrature sensor signals, a 5V quadrature sensor voltage supply, and a quadrature sensor ground. The first two connections were connected to an external power supply capable of generating up to 20V DC. Quadrature A was fed into pin the five-volt tolerant PA6 pin and the signal from Quadrature B was fed into the five-volt tolerant PA8 pin, both on the MCU. The 5V quadrature sensor voltage supply and ground were both provided by the MCU.\n\n\n\nFigure 3: Motor Electrical Schematic"
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#results-and-discussion",
+    "href": "labs/lab5/e155-lab5.html#results-and-discussion",
+    "title": "Lab 5: Interrupts",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe interrupt encoder proved to provide accurate velocity measurements and consistent direction determination, whether operating at very high or low motor speeds. The implementation of interrupts allow the processor within the MCU to carry out other tasks while waiting for an interrupt trigger event to appear, increasing responsiveness, accuracy, and efficiency. In this lab, high-speed resolution was obtained by increasing the counter each time the positive and negative edges of both encoders was detected. Using a traditionally polling method, the MCU would need to constantly monitor and check these flags and operate accordingly. In high-speed and high-precision systems, the polling rate may be too slow and generate incorrect or incomplete data and the CPU requires greater power to consistently circulate through this scanning process and can possibly overheat and diminish performance. Above all, the MCU can only operate as fast as the polling loop allows for, which means that the polling process is not suitable for time-sensitive control."
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#conclusion",
+    "href": "labs/lab5/e155-lab5.html#conclusion",
+    "title": "Lab 5: Interrupts",
+    "section": "Conclusion",
+    "text": "Conclusion\nI can confidently say that Lab 5 was completed to full specifications. This lab, including the write-up process, totalled about 10 hours of productive work. The quadrature pattern identified properly determined the motor’s direction and the interrupt method allowed for high-resolution speed calculations, even at extremely high and low apparent speeds."
+  },
+  {
+    "objectID": "labs/lab5/e155-lab5.html#ai-prototype",
+    "href": "labs/lab5/e155-lab5.html#ai-prototype",
+    "title": "Lab 5: Interrupts",
+    "section": "AI Prototype",
+    "text": "AI Prototype\nTo test ChatGPT’s capability at coding MCU interrupts for quadrature measurements, it was given the following prompt: “Write me interrupt handlers to interface with a quadrature encoder. I’m using the STM32L432KC, what pins should I connect the encoder to in order to allow it to easily trigger the interrupts?” I added a slight modification to prohibit ChatGPT from using HAL to better compare its code and mine. The code it provides can be found in Figures 4 and 5.\n\n\n\nFigure 4: ChatGPT main function\n\n\n\n\n\nFigure 5: ChatGPT interrupt handler\n\n\nChatGPT’s code appears to be solid. It uses built-in CMSIS more frequently in both the main function and interrupt handler, whereas I opted for specific bit setting for more clarity. ChatGPT opted to have the counter increase in both the positive and negative direction, depending on the direction of the motor, instead of specifically coding for “CW” and “CCW,” like I had. This came off as more elegant to me and would be something I would implement when presented with a similar problem in the future."
+  },
+  {
     "objectID": "labs/lab1/e155-lab1.html",
     "href": "labs/lab1/e155-lab1.html",
     "title": "Lab 1: FPGA and MCU Testing and Setup",
@@ -214,7 +270,7 @@
     "href": "labs.html",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 description\n\n\n\nLab 5 description\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker.\n\n\n\nLab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction.\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
   },
   {
     "objectID": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
@@ -242,14 +298,14 @@
     "href": "labs.html#lab-4-digital-audio",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 4 description"
+    "text": "Lab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker."
   },
   {
     "objectID": "labs.html#lab-5-interrupts",
     "href": "labs.html#lab-5-interrupts",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 5 description"
+    "text": "Lab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction."
   },
   {
     "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
