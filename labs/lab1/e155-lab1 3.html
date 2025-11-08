@@ -8,9 +8,9 @@
 
 <meta name="author" content="Thomas Lilygren">
 <meta name="dcterms.date" content="2025-09-02">
-<meta name="description" content="Here I outline my reflections on the first lab of E155">
+<meta name="description" content="Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.">
 
-<title>Lab 1 Reflection – E155 Portfolio</title>
+<title>Lab 1: FPGA and MCU Testing and Setup – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,8 +71,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -93,23 +122,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../labs.html"> 
+    <a class="nav-link" href="../../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../project.html"> 
-<span class="menu-text">Project</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../resources.html"> 
+    <a class="nav-link" href="../../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -123,24 +148,38 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a>
+  <ul class="collapse">
+  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
+  </ul></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
+  <ul class="collapse">
+  <li><a href="#block-diagrams" id="toc-block-diagrams" class="nav-link" data-scroll-target="#block-diagrams">Block Diagrams</a></li>
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ai-prototype-summary" id="toc-ai-prototype-summary" class="nav-link" data-scroll-target="#ai-prototype-summary">AI Prototype Summary</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 1 Reflection</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">reflection</div>
-    <div class="quarto-category">labreport</div>
-  </div>
-  </div>
+<h1 class="title">Lab 1: FPGA and MCU Testing and Setup</h1>
+</div>
 
 <div>
   <div class="description">
-    Here I outline my reflections on the first lab of E155
+    Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.
   </div>
 </div>
 
@@ -169,9 +208,203 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This lab was a good introduction into E155 and the work and dedication that these labs require. I spent the first few days getting my bearings and figuring out how to solder SMT connections and parse through the lab manual in a constructive way. There were many times where I felt like I was in over my head, but working with others and collaboration made this lab very informative and fun. I feel that I can use the Lattice and Questa software comfortably, which should help a lot in subsequent labs. I got closer with my peers and gained confidence that will at least carry me through the next week. I did not do the best job planning out my work, as I spent most of my time on this lab rather than other commitments. Going into Lab 2, I hope to establish a better plan, utilize grutoring hours more, and maintain more balance with my workload and social commitments.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this lab, proper functionality of the E155 development board was confirmed by exercising the on-board 48 MHz high-speed oscillator, controlling three embedded LEDs, and manipulating a seven-segment display connected with GPIO pins. The high-speed oscillator behaves as a clock that was divided with a counter to modify the blinking frequency of one of the on-board LEDs. A switch panel on the development board was used to control the other two embedded LEDs and the imaging on the external seven-segment display.</p>
+</section>
+<section id="design-and-testing" class="level2">
+<h2 class="anchored" data-anchor-id="design-and-testing">Design and Testing</h2>
+<p>As part of confirming the functionality of the FPGA and E155 development board, three embedded LEDs were expected to abide by the logic displayed in the tables below. The S values represent the elements of the 4-input switch on the board.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">S1</th>
+<th style="text-align: center;">S0</th>
+<th style="text-align: center;">led[0]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">S3</th>
+<th style="text-align: center;">S2</th>
+<th style="text-align: center;">led[1]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">led[2]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Blink at 2.4 Hz</td>
+</tr>
+</tbody>
+</table>
+<p>With an on-board switch panel linked to the UPduino 3.1 FPGA board, a SystemVerilog file implemented the conditional logic to illuminate two of the three LEDs. While the third LED operated independent of switch logic, its control was established using the built-in 48 MHz high-speed oscillator (HSOSC) from the iCE40 UltraPlus primitive library. A 24-bit counter was used to divide the 48 MHz clock cycle down to the desired 2.4 Hz. Further board GPIO testing was conducted by powering an HDSP-511A seven-segment display to uniquely display each hexadecimal digit (0-F). Segments were illuminated depending on the same switch element that governed the first two embedded LEDs, meaning the segment outputs relied solely on combinational logic. The hexadecimal digits displayed mirrored the binary combination that the switches displayed. To ensure uniform brightness, regardless of the number of segments powered, each pin on the display was wired in parallel with 1 kOhm resistors to limit current draw, as calculated in Figure 2.<br>
+Design implementation was executed through two separate modules in Lattice Raidant. The combinational logic governing the seven-segment display was written in an isolated module that was later called upon in the top-level module. The top-level module implemented the 48 MHz HSOSC, the clock divider, the conditional LED logic, and called upon the seven segment display module. The pull-up resistor in the development board means active components have a logical low and those inactive have a logical high.<br>
+Before implementation, the hardware and modules each received through testing. The 3.3 V and 5 V regulators on the board were confirmed to be operational using an external power supply and a multimeter before installing the FPGA and MCU. Testbenches were established for each module to confirm satisfactory waveforms and logic within Questa simulations. The 2.4 Hz oscillating LED was read on an oscilloscope to confirm the clock had been established and properly divded. Current draw calculations for the on-board LEDs and seven-segment display, as well as the clock divider calculations are provided in Figures 1, 2, and 3, respectively.</p>
+<section id="calculations" class="level3">
+<h3 class="anchored" data-anchor-id="calculations">Calculations</h3>
+<p>The three LEDs on the development board and external seven-segment display are powered with 3.3 V from the FPGA. Each LED requires a current-limiting resistor to preserve the diode while maintaining sufficient brightness. By incorporating the source voltage, voltage drop across each diode, and the desired current, the proper resistor values were obtained with Ohm’s Law (V = IR).<br>
+The LEDs illuminated on the development board during this lab were blue, indicating a forward voltage drop around 2.6 V. These diodes are high-efficiency, meaning they can glow at currents less than 1 mA. The deep red diodes on each segment of the seven-segment display exhibit a forward voltage drop of 2 V. Sufficient and safe illuminesence for those external LEDs can be obtained with a current ranging from 1-10 mA.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/blue_leds_calcs_new.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: The calculations to limit current draw for the on-board LEDs</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/7_seg_calcs.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: The calculations to limit current draw for the seven-segment display</figcaption>
+</figure>
+</div>
+<p>The 48 MHz clock was divided with a counter. A counter of length n divides the clock at a rate of <span class="math inline">\(2^n\)</span>. Since 48 MHz cannot reach 2.4 Hz simply by dividing by some <span class="math inline">\(2^n\)</span>, the counter can be compared to and reset when it reaches a specific decimal value. The decimal value is found to be 5,000,000 as that divides the 48 MHz into an even square signal with a 2.4 Hz frequency.</p>
+</section>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
+<section id="block-diagrams" class="level3">
+<h3 class="anchored" data-anchor-id="block-diagrams">Block Diagrams</h3>
+<p>The source code for the project can be found at <a href="https://github.com/tlilygren/e155-lab1">Github Repository.</a></p>
+<p>The following block diagrams in Figures 3 and 4 show the overall flow, inputs, and outputs within each module of the lab. The top module includes the HSOSC component, the counter, combinational logic for the first two LEDs, and the seven segment display module.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/top_block.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: The block diagram describing the inputs, outputs, and flow within the top module</figcaption>
+</figure>
+</div>
+<p>Figure 4 shows the inputs, outputs, and flow of the seven segment display module. This module is purely combinational with only one input and one output.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/7_seg_block.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: The block diagram describing the inputs, outputs, and flow within the sevensegment module</figcaption>
+</figure>
+</div>
+</section>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<p>Figure 5 displays the electrical schematic for the three on-board LEDs using the correct resistor values established in Figure 2.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/leds_eschem_NEW.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: The electrical schematic for the on-board LEDs to ensure proper illuminesence without extreme current draw</figcaption>
+</figure>
+</div>
+<p>Figure 6 presents the electrical schematic for the seven-segment display with the proper resistor values determined in Figure 2. The GPIO pins each segment is connected to can act as a power source or a ground.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/7seg_eschem_new_new.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: The electrical schematic for the external seven-segment display to ensure proper illuminesence without extreme current draw</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>Figure 7 shows the waveforms from the top module. The first line shows the clock cycles, the second highlights the reset state, and the third describes the switch inputs. Notice the switch inputs contain all possible hexadecimal digits that should be displayed on the segments. Since led[2] oscillates at the same frequency regardless of the input values, that component was confirmed separately with the oscilloscope image in Figure 9.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/top_waves.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 7: A screenshot of the QuestaSim simulation demonstrating that the top module exhibits the correct logic for led[1], led[0], and all segment outputs.</figcaption>
+</figure>
+</div>
+<p>Figure 8 shows the waveforms generated from the seven-segment module simulation. These waveform simulations also appear in the top module simulation, but it is best to confirm that both modules work properly to aid in debugging combinational logic issues or implementation issues. Notice all segments demonstrate the desired behavior outlined in the test vectors.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/7seg_waves.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 8: The QuestaSim simulation waveforms showcasing that each segment of the seven segment display produces the correct logic for all possible inputs.</figcaption>
+</figure>
+</div>
+<p>Figure 9 outlines the periodic square wave influenced by the oscillating LED. Using built-in functions on the oscilloscope, the frequency is measured to be 2.4 Hz, as desired.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/led2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 9: This oscilloscope image reveals led[2] oscillating at the desired 2.4 Hz, indicating proper division of the high-speed oscillator.</figcaption>
+</figure>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The simulations and hardware implementations show that this lab was successful in all regards. The LEDs activated and behaved in their expected manner and the seven-segment display showed all hexadecimal digits when expected. The lab took roughly 25 hours to complete.</p>
+</section>
+<section id="ai-prototype-summary" class="level2">
+<h2 class="anchored" data-anchor-id="ai-prototype-summary">AI Prototype Summary</h2>
+<p>The power of AI continues to grow by the day and may be a useful tool when programming hardware such as the code developed in this Lab. To test the efficacy and reliability of its capabilities, the following prompt was entered into ChatGPT and synthesized in the Radiant software: “Write SystemVerilog HDL to leverage the internal high speed oscillator in the Lattice UP5K FPGA and blink an LED at 2 Hz. Take full advantage of SystemVerilog syntax, for example, using logic instead of wire and reg.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ai1.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 10: Initial ChatGPT request with the prompt above</figcaption>
+</figure>
+</div>
+<p>After the initial request, ChatGPT’s code yielded a 35901063 error, meaning that it did not instantiate the high-frequency oscillator.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ai2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 11: ChatGPT rewrite after listing the code above.</figcaption>
+</figure>
+</div>
+<p>After the first revision a new error code, 1025000, appeared. This means that the parameter “CLKHF_DIV” was not defined in the module.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ai3.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 12: ChatGPT second rewrite</figcaption>
+</figure>
+</div>
+<p>A new error (35811103) appeared. Lattice stated that it could not resolve blackbox module “SB_HFOSC” in the device.<br>
+A few more subsequent attempts were prompted, but the design continuously could not synthesize. According to this trial, ChatGPT still has a long way to go before it can reliably program hardware.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -2,37 +2,100 @@
   {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "E155 Blogs",
+    "title": "E155 Blog Posts",
     "section": "",
-    "text": "Here I outline why I enrolled in E155 and what I hope to gain from my experience.\n\n\n\nHere I reflect on the struggles and successes that defined my first lab in E155."
+    "text": "A deep dive into why I chose to enroll in E155, and what I hope to gain from this experience.\n\n\n\nAn analysis on the struggles and growth that defined my first lab of the semester.\n\n\n\nA reflection on my growth from Lab 1 and an analysis on my approach to overcome the roadblocks Lab 2 imposed.\n\n\n\nA candid commentary on the struggles I faced completing Lab 3 and an evaluation on areas of improvement.\n\n\n\nA discussion on the transition from Verliog to C programming and a critique on my approach to Lab 4."
   },
   {
-    "objectID": "blog.html#reflection-0-goals-for-microps",
-    "href": "blog.html#reflection-0-goals-for-microps",
-    "title": "E155 Blogs",
+    "objectID": "blog.html#week-0-reflection-goals-for-microps",
+    "href": "blog.html#week-0-reflection-goals-for-microps",
+    "title": "E155 Blog Posts",
     "section": "",
-    "text": "Here I outline why I enrolled in E155 and what I hope to gain from my experience."
+    "text": "A deep dive into why I chose to enroll in E155, and what I hope to gain from this experience."
   },
   {
-    "objectID": "blog.html#reflection-lab-1-fpga-and-mcu-setup-and-testing",
-    "href": "blog.html#reflection-lab-1-fpga-and-mcu-setup-and-testing",
-    "title": "E155 Blogs",
+    "objectID": "blog.html#lab-1-reflection-fpga-and-mcu-setup-and-testing",
+    "href": "blog.html#lab-1-reflection-fpga-and-mcu-setup-and-testing",
+    "title": "E155 Blog Posts",
     "section": "",
-    "text": "Here I reflect on the struggles and successes that defined my first lab in E155."
+    "text": "An analysis on the struggles and growth that defined my first lab of the semester."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "E155 Portfolio",
+    "objectID": "blog.html#lab-2-reflection-multiplexed-seven-segment-display",
+    "href": "blog.html#lab-2-reflection-multiplexed-seven-segment-display",
+    "title": "E155 Blog Posts",
     "section": "",
-    "text": "Thomas Lilygren is a senior engineering major at Harvey Mudd College with a keen interest in electrical and systems engineering. His career aspirations involve combining his electrical engineering skills with his business internship experience and economics concentration through the development of his own business. In his free time, he enjoys golfing, climbing, and reading philosophy. Join him on his journey as he explores the fascinating and expansive world of microprocessor design!"
+    "text": "A reflection on my growth from Lab 1 and an analysis on my approach to overcome the roadblocks Lab 2 imposed."
   },
   {
-    "objectID": "posts/first-post.html",
-    "href": "posts/first-post.html",
-    "title": "Goals for MicroPs",
+    "objectID": "blog.html#lab-3-reflection-keypad-scanner",
+    "href": "blog.html#lab-3-reflection-keypad-scanner",
+    "title": "E155 Blog Posts",
     "section": "",
-    "text": "I remember wanting to take MicroPs before I even declared as an engineering major. Not only because the projects from previous cohorts left me in awe, but also because each person I talked to described this as one of their most rewarding experiences. E155 explores so many facets of digital and hardware design and instills coveted skills that apply to all realms of engineering. I hope to use this opportunity to push myself beyond the limits I untinentionally impose on myself and embrace the uncertainty that comes along with the rigorous curriculum. I aspire to learn the techniques, time management, decision-making skills, and debugging practices that industry experts employ on a day-to-day basis. On top of this, I hope to forge new friendships with my peers, bonding over the struggles, challeneges, and long lab hours that we will share throughout the semester."
+    "text": "A candid commentary on the struggles I faced completing Lab 3 and an evaluation on areas of improvement."
+  },
+  {
+    "objectID": "blog.html#lab-4-reflection-digital-audio",
+    "href": "blog.html#lab-4-reflection-digital-audio",
+    "title": "E155 Blog Posts",
+    "section": "",
+    "text": "A discussion on the transition from Verliog to C programming and a critique on my approach to Lab 4."
+  },
+  {
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker.\n\n\n\nLab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction.\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
+  },
+  {
+    "objectID": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
+    "href": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog."
+  },
+  {
+    "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
+    "href": "labs.html#lab-2-multiplexed-7-segment-display",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "This lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits"
+  },
+  {
+    "objectID": "labs.html#lab-3-keypad-scanner",
+    "href": "labs.html#lab-3-keypad-scanner",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display."
+  },
+  {
+    "objectID": "labs.html#lab-4-digital-audio",
+    "href": "labs.html#lab-4-digital-audio",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker."
+  },
+  {
+    "objectID": "labs.html#lab-5-interrupts",
+    "href": "labs.html#lab-5-interrupts",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction."
+  },
+  {
+    "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
+    "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 6 description"
+  },
+  {
+    "objectID": "labs.html#lab-7-the-advanced-encryption-standard",
+    "href": "labs.html#lab-7-the-advanced-encryption-standard",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 7 description"
   },
   {
     "objectID": "posts/lab-1-reflection.html",
@@ -137,7 +200,7 @@
     "href": "labs/lab5/e155-lab5.html#results-and-discussion",
     "title": "Lab 5: Interrupts",
     "section": "Results and Discussion",
-    "text": "Results and Discussion\nThe interrupt encoder proved to provide accurate velocity measurements and consistent direction determination, whether operating at very high or low motor speeds. The implementation of interrupts allow the processor within the MCU to carry out other tasks while waiting for an interrupt trigger event to appear, increasing responsiveness, accuracy, and efficiency. In this lab, high-speed resolution was obtained by increasing the counter each time the positive and negative edges of both encoders was detected. Using a traditionally polling method, the MCU would need to constantly monitor and check these flags and operate accordingly. In high-speed and high-precision systems, the polling rate may be too slow and generate incorrect or incomplete data and the CPU requires greater power to consistently circulate through this scanning process and can possibly overheat and diminish performance. Above all, the MCU can only operate as fast as the polling loop allows for, which means that the polling process is not suitable for time-sensitive control."
+    "text": "Results and Discussion\nThe interrupt encoder proved to provide accurate velocity measurements and consistent direction determination, whether operating at very high or low motor speeds. The implementation of interrupts allow the processor within the MCU to carry out other tasks while waiting for an interrupt trigger event to appear, increasing responsiveness, accuracy, and efficiency. In this lab, high-speed resolution was obtained by increasing the counter each time the positive and negative edges of both encoders was detected. Using a traditionally polling method, the MCU would need to constantly monitor and check these flags and operate accordingly. In high-speed and high-precision systems, the polling rate may be too slow and generate incorrect or incomplete data and the CPU requires greater power to consistently circulate through this scanning process and can possibly overheat and diminish performance. Above all, the MCU can only operate as fast as the polling loop allows for, which means that the polling process is not suitable for time-sensitive control.\n\n\n\nFigure 4: Interrupt Quaratures"
   },
   {
     "objectID": "labs/lab5/e155-lab5.html#conclusion",
@@ -152,6 +215,62 @@
     "title": "Lab 5: Interrupts",
     "section": "AI Prototype",
     "text": "AI Prototype\nTo test ChatGPT’s capability at coding MCU interrupts for quadrature measurements, it was given the following prompt: “Write me interrupt handlers to interface with a quadrature encoder. I’m using the STM32L432KC, what pins should I connect the encoder to in order to allow it to easily trigger the interrupts?” I added a slight modification to prohibit ChatGPT from using HAL to better compare its code and mine. The code it provides can be found in Figures 4 and 5.\n\n\n\nFigure 4: ChatGPT main function\n\n\n\n\n\nFigure 5: ChatGPT interrupt handler\n\n\nChatGPT’s code appears to be solid. It uses built-in CMSIS more frequently in both the main function and interrupt handler, whereas I opted for specific bit setting for more clarity. ChatGPT opted to have the counter increase in both the positive and negative direction, depending on the direction of the motor, instead of specifically coding for “CW” and “CCW,” like I had. This came off as more elegant to me and would be something I would implement when presented with a similar problem in the future."
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html",
+    "href": "labs/lab6/e155-lab6.html",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "",
+    "text": "This lab introduces SPI communication and the Internet of Things. The DS1722 temperature sensor records the ambient temperature and sends the data to the STM32L432KCU MCU. Temperature data is transferred via USART to a local website hosted by the ESP8266. Temperature resolution and LED control options are presented on the website to modify MCU and temperature sensor behavior."
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#introduction",
+    "href": "labs/lab6/e155-lab6.html#introduction",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "",
+    "text": "This lab introduces SPI communication and the Internet of Things. The DS1722 temperature sensor records the ambient temperature and sends the data to the STM32L432KCU MCU. Temperature data is transferred via USART to a local website hosted by the ESP8266. Temperature resolution and LED control options are presented on the website to modify MCU and temperature sensor behavior."
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#design-and-testing",
+    "href": "labs/lab6/e155-lab6.html#design-and-testing",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Design and Testing",
+    "text": "Design and Testing\nWebsite features for controlling an external LED, the temperature resolution, and temperature display were implemented with HTML code and transferred to the webiste with USART. Temperature resolution can be configured between 8 and 12 bits. Resolution selections write to the configuration register in the DS1722. Temperature data is continuously read as two separate character values, with the signed most significant character being sent first followed by the least significant character repesenting the decimal portion. The least significant character is corrected by a factor of 256 to get it to its intended fractional value. SPI parameters like the"
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#calculations",
+    "href": "labs/lab6/e155-lab6.html#calculations",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Calculations",
+    "text": "Calculations\nThe website control a green external LED with two buttons. When the on button is pressed, the LED activates, and turns off once the off button is pressed. The LED is powered with 5V and has a forward voltage drop of 1.88 V. Current must be limited to within 10 mA. Sufficient brightness can be achieved with a current above 5 mA, so a 560 Ohm resistor was selected based on the calculation below.\n\n\n\nFigure 1: LED Resistor Calculation"
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#technical-documentation",
+    "href": "labs/lab6/e155-lab6.html#technical-documentation",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\n\nElectric Schematic\nWith the external LED, the primary connections were between the DS1722 sensor and the MCU. USART connections between the MCU and ESP8266 were handled internally within the E155 development board and are thus excluded. SPI pins, 5V volage, and ground connections were directly connected to the receiving pins within the temperature sensor as indicated below.\n\n\n\nFigure 2: Electric Schematic"
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#results-and-discussion",
+    "href": "labs/lab6/e155-lab6.html#results-and-discussion",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nSPI communication was confirmed by reading the MISO and MOSI lines with the Logic Analyzer. The configuration write register is 0x80 which is clear in the first SPI transaction. The MSB value is later received as indicated by the reading of register 0x02 and a dummy variable is sent after to complete the transaction. Between this 16-bit transaction, the clock enable purposefully lowers and rises again to read the LSB values in the 0x01 register. The second values in each MISO transaction indicate the MSB and LSB values, which are then converted to temperature readings.\n\n\n\nFigure 3: SPI Demonstration over Logic Analyzer"
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#conclusion",
+    "href": "labs/lab6/e155-lab6.html#conclusion",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis lab took roughly 20 hours complete. While some obscure MISO behavior is recorded on the logic analyzer, the website successfully controls temperature readings and resolution. I learned a lot about SPI behavior, some HTML code, and USART communication, which will come in handy for the final project. There was a lot of tedious and painful debugging that stumped me, even when all individual aspects appeared to be properly implemented."
+  },
+  {
+    "objectID": "labs/lab6/e155-lab6.html#ai-prototype",
+    "href": "labs/lab6/e155-lab6.html#ai-prototype",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "AI Prototype",
+    "text": "AI Prototype\nChatGPT was tested to how efficiently it can write HTML code and produce functioning SPI communication code. The first prompt it was given was: “I’m making a web portal to interface with a temperature sensor. Create a HTML page that looks good and is intuitive to show the temperature, control an LED, and change the precision of the readout.” ChatGPT handled this no problem writing hundreds of lines of code to produce a sleek website that exceeds the bare-bones implementation developed with this lab. ChatGPT certainly has no problem writing functioning HTML code.\n\n\n\nFigure 4: ChatGPT Prompt 1\n\n\nChatGPT was given a second prompt to test its SPI writing capabilities: “Write me a C function to carry out a SPI transaction to retrieve a temperature reading from a DS1722 sensor. Make use of CMSIS libraries for the STM32L432KC.” This code employed obscure libraries that were hard to follow and interpret. Even when including these libraries, the code would not run properly on my computer. It’s logic to send and receive data using addresses and dummy values looked promising, but it is clear that the LLM’s HTML writing capabilities is far superior than its SPI communication capabilities.\n\n\n\nFigure 5: ChatGPT Prompt 2"
   },
   {
     "objectID": "labs/lab1/e155-lab1.html",
@@ -201,6 +320,55 @@
     "title": "Lab 1: FPGA and MCU Testing and Setup",
     "section": "AI Prototype Summary",
     "text": "AI Prototype Summary\nThe power of AI continues to grow by the day and may be a useful tool when programming hardware such as the code developed in this Lab. To test the efficacy and reliability of its capabilities, the following prompt was entered into ChatGPT and synthesized in the Radiant software: “Write SystemVerilog HDL to leverage the internal high speed oscillator in the Lattice UP5K FPGA and blink an LED at 2 Hz. Take full advantage of SystemVerilog syntax, for example, using logic instead of wire and reg.”\n\n\n\nFigure 10: Initial ChatGPT request with the prompt above\n\n\nAfter the initial request, ChatGPT’s code yielded a 35901063 error, meaning that it did not instantiate the high-frequency oscillator.\n\n\n\nFigure 11: ChatGPT rewrite after listing the code above.\n\n\nAfter the first revision a new error code, 1025000, appeared. This means that the parameter “CLKHF_DIV” was not defined in the module.\n\n\n\nFigure 12: ChatGPT second rewrite\n\n\nA new error (35811103) appeared. Lattice stated that it could not resolve blackbox module “SB_HFOSC” in the device.\nA few more subsequent attempts were prompted, but the design continuously could not synthesize. According to this trial, ChatGPT still has a long way to go before it can reliably program hardware."
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html",
+    "href": "labs/lab7/e155-lab7.html",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "",
+    "text": "This lab dives into the Advanced Encryption Standard (AES) for secure communication. The initiates plain text communication between the STM32L432KCU microcontroller unit and the iCE40UP5K FPGA. The MCU initiates SPI communication with the FPGA, which behaves as the accelerator, providing it with an encryption key and unsecure message. Once the 128-bit message undergoes sufficient AES cycling, the encrypted message is sent back to the MCU."
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html#introduction",
+    "href": "labs/lab7/e155-lab7.html#introduction",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "",
+    "text": "This lab dives into the Advanced Encryption Standard (AES) for secure communication. The initiates plain text communication between the STM32L432KCU microcontroller unit and the iCE40UP5K FPGA. The MCU initiates SPI communication with the FPGA, which behaves as the accelerator, providing it with an encryption key and unsecure message. Once the 128-bit message undergoes sufficient AES cycling, the encrypted message is sent back to the MCU."
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html#design-and-testing",
+    "href": "labs/lab7/e155-lab7.html#design-and-testing",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Design and Testing",
+    "text": "Design and Testing\nThe Advanced Encryption Standard requires five fundamental sub-modules: SubBytes, ShiftRows, MixColumns, AddRoundKey, and KeyExpansion. The SubBytes module employs a synchronous sbox function, which converts the message bits to their counterparts outlined in the table in FIPS 197 Figure 7. A synchronous method is employed here to preserve the LUTs onboard the FPGA to ensure physical implementation is possible. A similar rational motivates the KeyExpansion module which systematically generates a new key for the subsequent round based on the current key and round number. Following AES standards, the 128-bit encryption process follows eleven cycles: the first passes the plaintext message into the AddRoundKey function and generates a new key, the second through tenth cycle passes the increasingly encrypted method through the SubBytes, ShiftRows, MixColumns, AddRoundKey, and KeyExpansion modules (in that order), and the last cycle mimics the primary cycle, only bypassing the MixColumns function. These cycles were implemented with a Finite State Machine, governing when modules are active, the current round, and which modules to skip."
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html#technical-documentation",
+    "href": "labs/lab7/e155-lab7.html#technical-documentation",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\n\nBlock Diagram\nThis implementation of AES relied on many levels of abstraction. The top module called on the aes_spi module and the aes_core module. The aes_core function houses all sub-modules present within the AES cycle. The top module, aes_core module, and the FSM state transition diagram are illustrated in Figures 1, 2, and 3, respectively.\n\n\n\nFigure 1: Full AES Accelerator Block Diagram\n\n\n\n\n\nFigure 2: AES Core Block Diagram\n\n\n\n\n\nFigure 3: FSM State Transition Diagram"
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html#results-and-discussion",
+    "href": "labs/lab7/e155-lab7.html#results-and-discussion",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nIndependent waveforms for each module, and sub-module, by extension, prove proper behavior for the SPI encryption and general message encryption (Figures 4 and 5, respectively). The outputs from these primary aes modules were validated with examples provided in the FIPS 197 appendix, while the building-block modules’ results were validated with personal computation and bit-mapping (Figures 6 through 9). The physical success of this lab was confirmed by measuring the SPI communication with a logic analyzer on the Rigol oscilloscopes provided in lab. The communication patterns were confirmed to match those of the simulation waveforms, indicating that the AES accelerator did not exhaust all FPGA LUTs.\n\n\n\nFigure 4: Full AES Accelerator Waveforms\n\n\n\n\n\nFigure 5: AES Core Accelerator Waveforms\n\n\n\n\n\nFigure 6: SubBytes Module Waveforms\n\n\n\n\n\nFigure 7: ShiftRows Module Waveforms\n\n\n\n\n\nFigure 8: AddRoundKey Module Waveforms\n\n\n\n\n\nFigure 9: KeyExpansion Module Waveforms\n\n\n\n\n\nFigure 10: SPI Communication Confirmed with Logic Analyzer"
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html#conclusion",
+    "href": "labs/lab7/e155-lab7.html#conclusion",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Conclusion",
+    "text": "Conclusion\nAfter roughly 20-25 productive working hours, this lab meets the listed specifications. The biggest challenge, besides wrapping my head around the lab conceptually, was modifying the aes_core module after running the simulation. The simulation allowed a design with many latches that would disrupt physical implementation. After accounting for these latches, the simulation was executed again and performed as desired."
+  },
+  {
+    "objectID": "labs/lab7/e155-lab7.html#ai-prototype",
+    "href": "labs/lab7/e155-lab7.html#ai-prototype",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "AI Prototype",
+    "text": "AI Prototype\nAs with all other labs, ChatGPT was provided a prompt to see how its performance compares to the hours of hardwork I put into this lab. The first prompt was: “Write SystemVerilog HDL to implement the KeyExpansion logic described in the FIPS-197 uploaded document. The module should be purely combinational, using the previous key and current round number to calculate the next key. Assume other required modules (SubWord and RotWord) are already implemented.” The LLM’s response can be found in Figure 11.\n\n\n\nFigure 11: ChatGPT Prompt 1\n\n\nChatGPT did relatively good job generating the key expansion code. Its use of parameters allows for modular implementation and enhances readability, decreasing the risk of error. The code synthesized properly, only after creating the modules that the prompt referenced. Its code was more readable overall and was separated into manageable sections that would help with debugging.\nThe AI was tested further by receiving the same pseudocode I had as a reference, from FIPS Figure 5. The response is visible in Figure 12.\n\n\n\nFigure 12: ChatGPT Prompt 2\n\n\nThe code when given the second prompt also synthesized once the functions referenced were developed. Regardless, the LLM’s use of for loops in its Verilog code was concerning. While the accuracy and results of its code was not analyzed or tested, I suspect that this would cause issues, especially since it instantiates three separate for loops. I believe that the pseudocode pushed the AI in a different direction compared to when given solely a word-based prompt."
   },
   {
     "objectID": "labs/lab2/e155-lab2.html",
@@ -259,6 +427,62 @@
     "text": "AI Prototype\nChatGPT’s hardware design for the first lab failed after multiple prompts and updates with Lattice Radiant’s error codes. Here, its capabilities are tested again with the following prompt: “Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits.”\n\n\n\nFigure 13: Initial prompt to ChatGPT\n\n\nUnlike last, ChatGPT developed hardware code that synthesized in Lattice Radiant on the first try without any reference code from lab 1. It appears that ChatGPT’s ability to program hardware is improving. Still, its capabilities will be tested when it has a base script to refer to with the following prompt: “Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits. Use the seven segment decoder and oscillator provided in the attached files.”\n\n\n\nFigure 14: ChatGPT prompt with lab 1 reference code\n\n\nAfter providing reference code from lab 1, ChatGPT ran into its first error in that it called a seven-segment display module that it did not create. Once prompted to create the seven-segment display module, it copied the code in the module it had been provided and Lattice Synthesized the project without issue.\nIt is clear that ChatGPT is gaining traction with hardware design and programming whether receiving help with working code or not. Instead of using the ternary operator for a multiplexer, ChatGPT opts for a case statement, which behaves the same, but is less elegant. The AI also uses different instances of variables when calling the seven-segment display module. For example, instead of using “sevensegment display(s, seg),” it uses “sevensegment display(.s(current_intput), .seg(seg)).” The code appears to behave the same, but I prefer my implementation over ChatGPT’s."
   },
   {
+    "objectID": "labs/lab4/e155-lab4.html",
+    "href": "labs/lab4/e155-lab4.html",
+    "title": "Lab 4: Digital Audio",
+    "section": "",
+    "text": "This lab serves as an in-depth introductioin to the STM32L432KCU timer peripherals. Proper configuration of these peripherals allows Fur Elise and Happy Birthday to play based on a set of input frequencies and note durations."
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#introduction",
+    "href": "labs/lab4/e155-lab4.html#introduction",
+    "title": "Lab 4: Digital Audio",
+    "section": "",
+    "text": "This lab serves as an in-depth introductioin to the STM32L432KCU timer peripherals. Proper configuration of these peripherals allows Fur Elise and Happy Birthday to play based on a set of input frequencies and note durations."
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#design-and-testing",
+    "href": "labs/lab4/e155-lab4.html#design-and-testing",
+    "title": "Lab 4: Digital Audio",
+    "section": "Design and Testing",
+    "text": "Design and Testing\nTimers 15 and 16 were selected to carry out this lab. Timer 15 controls note duration while Timer 16 modulates the frequency for a given input. For both timers, special attention must be paid to the prescalar (PSC) and auto-reload register (ARR) values. The prescalar value divides the 40 MHz input clock and controls measurement resolution, while the auto-reload register value determines the absolute maximum and minimum frequency and duration values that can be achieved at a given prescalar. Both registers for both timers are 16-bits, meaning careful attention must be kept to ensure neither overflows throughout the duration of the songs. For this application, PSC values for both timers were held constant at a value that preserves resolution while modulating the ARR values for the input at a given time. Timer 16 was configured in an alternate mode function for proper GPIO behavior, and the square wave structure relied on the compare-control register to always generate a 50% duty cycle."
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#calculations",
+    "href": "labs/lab4/e155-lab4.html#calculations",
+    "title": "Lab 4: Digital Audio",
+    "section": "Calculations",
+    "text": "Calculations\nBoth timer operated with 16-bit ARR and PSC registers that must be carefully configured to ensure a full range of operability with reliable resolution measurements. Maximizing the ARR and PSC values at 65535 yields the maximum duration the MCU can play a note and the minimum frequency that note could be. By minimizing these values to 0, the minimum note duration and maximum note frequency can be determined. Refer to Figures 1-4 for these calculations.\n\n\n\nFigure 1: Minimum Duration Calculation\n\n\n\n\n\nFigure 2: Maximum Duration Calculation\n\n\n\n\n\nFigure 3: Minimum Frequency Calculation\n\n\n\n\n\nFigure 4: Maximum Frequency Calculation\n\n\nTimer duration resolution can be determined by taking the input frequency of 40 MHz and dividing it by the prescalar. Taking this new frequency and taking its inverse yields the time step between counter ticks. This tick resolution should be capabale of handling minute time changes on the millisecond scale. The frequency output should yield less than 1% error for frequencies between 220 and 1000 Hz. For the preset prescalar, the ARR values for these frequency bounds were determined. Since this value can only be an integer, these values were then rounded and the output frequency for those rounded ARR values were computed. Error for each of these frequencies were well within the 1% error bounds as shown in Figure 6.\n\n\n\nFigure 5: Timer 15 Duration Resolution\n\n\n\n\n\nFigure 6: Timer 16 Frequency Resolution"
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#technical-documentation",
+    "href": "labs/lab4/e155-lab4.html#technical-documentation",
+    "title": "Lab 4: Digital Audio",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\n\nElectric Schematic\nFigure 7 displays the electronic schematic for the entire system. The square wave holding the note was output on the PA6 GPIO pin and fed into a potentiometer for volume control. The output from this potentiometer was fed into the LM386 audio amplifier and the sound was produced with an 8-ohm, 4-Watt speaker.\n\n\n\nFigure 7: Electronic Schematic"
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#results-and-discussion",
+    "href": "labs/lab4/e155-lab4.html#results-and-discussion",
+    "title": "Lab 4: Digital Audio",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThis lab meets all excellence specs, providing proper calculations, clear sound, and multiple songs capable of being played. Successful implementation was confirmed by listening to the sound output and using print debug statements to see if the output frequency and durations matched the inputs."
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#conclusion",
+    "href": "labs/lab4/e155-lab4.html#conclusion",
+    "title": "Lab 4: Digital Audio",
+    "section": "Conclusion",
+    "text": "Conclusion\nIn all, this lab took about 20 productive hours. Aside from familiarizing myself with the timer registers for proper initialization and duty cycle behavior, the biggest setback was not realizing that the GPIO pins must be configured in alternate mode. Once this was figured out, debugging progressed much faster as I could see where the script was problematic."
+  },
+  {
+    "objectID": "labs/lab4/e155-lab4.html#ai-prototype",
+    "href": "labs/lab4/e155-lab4.html#ai-prototype",
+    "title": "Lab 4: Digital Audio",
+    "section": "AI Prototype",
+    "text": "AI Prototype\nChatGPT’s capability at setting up this lab was tested by prompting: “What timers should I use on the STM32L432KC to generate frequencies ranging from 220Hz to 1kHz? What’s the best choice of timer if I want to easily connect it to a GPIO pin? What formulae are relevant, and what registers need to be set to configure them properly?”\nThe AI prepared a promising response, providing accurate formulae, configuring registers with CMSIS, and mentioning proper timers. It ends up choosing Timer 3, which is not concerning, but given its configuration with the CCR1 register, it fails to enable proper outputs that would permit sound to play.\n\n\n\nFigure 8: ChatGPT response to AI Prototype Prompt\n\n\n\n\n\nFigure 9: Response Continued"
+  },
+  {
     "objectID": "posts/lab-2-reflection.html",
     "href": "posts/lab-2-reflection.html",
     "title": "Lab 2 Reflection",
@@ -266,60 +490,18 @@
     "text": "After completing lab 1, I felt that I had more of a grasp effort, dedication, and time required to complete this lab to the best of my abilities. I set aside of bulk of my time to work on this lab, while still designating enough time for my other work and commitments. I had a hard time grasping the overall flow of how a time-multiplexer works and how it should be implemented, but thanks Xavier’s clear explanation, I felt the Verilog aspect was not as difficult as I initially assumed. I ran into an odd issue where a majority of the inputs displayed the correct values, but experienced an odd behavior at a few specific combinations. I spent hours trying to debug what was seemingly a hardware issue, but thankfully, a superb grutor, Troy, experienced the same issue I had when he worked on this lab. The issue was that the internal pull-up resistor was too weak and caused a latching behavior. By editing the internal pullup resistor in the Device Constraint Editor, my problem was miraculously solved! Additionally, my experience with testbenches typically involved test vectors, so to test all 256 possible switch combinations for the led sum logic, I manually wrote out close to 200 of them before realizing that there must be a better way. I learned how to write testbenches with assert statements and implemented my first successful iterating for loops in my multiplexer testbench. These experiences, while time-consuming in the moment, added more debugging tools that I can rely on in the future.\nI’ve heard many warnings about lab 3, but I feel confident that I can get through it. There were many times this lab and the last one where I felt like giving up and that I was in over my head, but ultimately, I found a way to get through. I am extremely grateful for my peers, Prof. Spencer, Xavier, and the grutors for helping me walk through certain steps and explaining concepts I initially found perplexing. Lab 3 strikes at an inconvenient time for me, since I have a project deliverable and clinic design review presentation due around the same time as my check-in, but I plan to get an early start, plan out my time to satisfy all commitments, and still allocate time for personal health, like exercising. I am proud of myself for these first two labs, and I maintain that feeling throughout the semester."
   },
   {
-    "objectID": "labs.html",
-    "href": "labs.html",
-    "title": "E155 Labs",
+    "objectID": "posts/first-post.html",
+    "href": "posts/first-post.html",
+    "title": "Goals for MicroPs",
     "section": "",
-    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker.\n\n\n\nLab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction.\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
+    "text": "I remember wanting to take MicroPs before I even declared as an engineering major. Not only because the projects from previous cohorts left me in awe, but also because each person I talked to described this as one of their most rewarding experiences. E155 explores so many facets of digital and hardware design and instills coveted skills that apply to all realms of engineering. I hope to use this opportunity to push myself beyond the limits I untinentionally impose on myself and embrace the uncertainty that comes along with the rigorous curriculum. I aspire to learn the techniques, time management, decision-making skills, and debugging practices that industry experts employ on a day-to-day basis. On top of this, I hope to forge new friendships with my peers, bonding over the struggles, challeneges, and long lab hours that we will share throughout the semester."
   },
   {
-    "objectID": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
-    "href": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
-    "title": "E155 Labs",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
     "section": "",
-    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog."
-  },
-  {
-    "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
-    "href": "labs.html#lab-2-multiplexed-7-segment-display",
-    "title": "E155 Labs",
-    "section": "",
-    "text": "This lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits"
-  },
-  {
-    "objectID": "labs.html#lab-3-keypad-scanner",
-    "href": "labs.html#lab-3-keypad-scanner",
-    "title": "E155 Labs",
-    "section": "",
-    "text": "Lab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display."
-  },
-  {
-    "objectID": "labs.html#lab-4-digital-audio",
-    "href": "labs.html#lab-4-digital-audio",
-    "title": "E155 Labs",
-    "section": "",
-    "text": "Lab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker."
-  },
-  {
-    "objectID": "labs.html#lab-5-interrupts",
-    "href": "labs.html#lab-5-interrupts",
-    "title": "E155 Labs",
-    "section": "",
-    "text": "Lab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction."
-  },
-  {
-    "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
-    "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
-    "title": "E155 Labs",
-    "section": "",
-    "text": "Lab 6 description"
-  },
-  {
-    "objectID": "labs.html#lab-7-the-advanced-encryption-standard",
-    "href": "labs.html#lab-7-the-advanced-encryption-standard",
-    "title": "E155 Labs",
-    "section": "",
-    "text": "Lab 7 description"
+    "text": "Thomas Lilygren is a senior engineering major at Harvey Mudd College with a keen interest in electrical and systems engineering. His career aspirations involve combining his electrical engineering skills with his business internship experience and economics concentration through the development of his own business. In his free time, he enjoys golfing, climbing, and reading philosophy. Join him on his journey as he explores the fascinating and expansive world of microprocessor design!"
   },
   {
     "objectID": "resources.html",

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Thomas Lilygren">
-<meta name="dcterms.date" content="2025-10-13">
-<meta name="description" content="Lab 7 description">
+<meta name="dcterms.date" content="2025-10-28">
+<meta name="description" content="Lab 7 implements AES to encrypt messages between the on-board MCU and FPGA">
 
 <title>Lab 7: The Advanced Encryption Standard – E155 Portfolio</title>
 <style>
@@ -105,6 +105,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Labs</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
@@ -119,8 +123,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
+  <ul class="collapse">
+  <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ai-prototype" id="toc-ai-prototype" class="nav-link" data-scroll-target="#ai-prototype">AI Prototype</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -136,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Lab 7 description
+    Lab 7 implements AES to encrypt messages between the on-board MCU and FPGA
   </div>
 </div>
 
@@ -153,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 13, 2025</p>
+      <p class="date">October 28, 2025</p>
     </div>
   </div>
   
@@ -165,8 +183,110 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This lab dives into the Advanced Encryption Standard (AES) for secure communication. The initiates plain text communication between the STM32L432KCU microcontroller unit and the iCE40UP5K FPGA. The MCU initiates SPI communication with the FPGA, which behaves as the accelerator, providing it with an encryption key and unsecure message. Once the 128-bit message undergoes sufficient AES cycling, the encrypted message is sent back to the MCU.</p>
+</section>
+<section id="design-and-testing" class="level2">
+<h2 class="anchored" data-anchor-id="design-and-testing">Design and Testing</h2>
+<p>The Advanced Encryption Standard requires five fundamental sub-modules: SubBytes, ShiftRows, MixColumns, AddRoundKey, and KeyExpansion. The SubBytes module employs a synchronous sbox function, which converts the message bits to their counterparts outlined in the table in FIPS 197 Figure 7. A synchronous method is employed here to preserve the LUTs onboard the FPGA to ensure physical implementation is possible. A similar rational motivates the KeyExpansion module which systematically generates a new key for the subsequent round based on the current key and round number. Following AES standards, the 128-bit encryption process follows eleven cycles: the first passes the plaintext message into the AddRoundKey function and generates a new key, the second through tenth cycle passes the increasingly encrypted method through the SubBytes, ShiftRows, MixColumns, AddRoundKey, and KeyExpansion modules (in that order), and the last cycle mimics the primary cycle, only bypassing the MixColumns function. These cycles were implemented with a Finite State Machine, governing when modules are active, the current round, and which modules to skip.</p>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
+<section id="block-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="block-diagram">Block Diagram</h3>
+<p>This implementation of AES relied on many levels of abstraction. The top module called on the aes_spi module and the aes_core module. The aes_core function houses all sub-modules present within the AES cycle. The top module, aes_core module, and the FSM state transition diagram are illustrated in Figures 1, 2, and 3, respectively.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/aes_top_block.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Full AES Accelerator Block Diagram</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: AES Core Block Diagram</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: FSM State Transition Diagram</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>Independent waveforms for each module, and sub-module, by extension, prove proper behavior for the SPI encryption and general message encryption (Figures 4 and 5, respectively). The outputs from these primary aes modules were validated with examples provided in the FIPS 197 appendix, while the building-block modules’ results were validated with personal computation and bit-mapping (Figures 6 through 9). The physical success of this lab was confirmed by measuring the SPI communication with a logic analyzer on the Rigol oscilloscopes provided in lab. The communication patterns were confirmed to match those of the simulation waveforms, indicating that the AES accelerator did not exhaust all FPGA LUTs.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/aes_spi_tb1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Full AES Accelerator Waveforms</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/aes_core_tb1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: AES Core Accelerator Waveforms</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/image(1).png" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: SubBytes Module Waveforms</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/image.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 7: ShiftRows Module Waveforms</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/image(2).png" class="img-fluid figure-img"></p>
+<figcaption>Figure 8: AddRoundKey Module Waveforms</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/aes_keyexpand.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 9: KeyExpansion Module Waveforms</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".png" class="img-fluid figure-img"></p>
+<figcaption>Figure 10: SPI Communication Confirmed with Logic Analyzer</figcaption>
+</figure>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>After roughly 20-25 productive working hours, this lab meets the listed specifications. The biggest challenge, besides wrapping my head around the lab conceptually, was modifying the aes_core module after running the simulation. The simulation allowed a design with many latches that would disrupt physical implementation. After accounting for these latches, the simulation was executed again and performed as desired.</p>
+</section>
+<section id="ai-prototype" class="level2">
+<h2 class="anchored" data-anchor-id="ai-prototype">AI Prototype</h2>
+<p>As with all other labs, ChatGPT was provided a prompt to see how its performance compares to the hours of hardwork I put into this lab. The first prompt was: “Write SystemVerilog HDL to implement the KeyExpansion logic described in the FIPS-197 uploaded document. The module should be purely combinational, using the previous key and current round number to calculate the next key. Assume other required modules (SubWord and RotWord) are already implemented.” The LLM’s response can be found in Figure 11.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_ai_1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 11: ChatGPT Prompt 1</figcaption>
+</figure>
+</div>
+<p>ChatGPT did relatively good job generating the key expansion code. Its use of parameters allows for modular implementation and enhances readability, decreasing the risk of error. The code synthesized properly, only after creating the modules that the prompt referenced. Its code was more readable overall and was separated into manageable sections that would help with debugging.</p>
+<p>The AI was tested further by receiving the same pseudocode I had as a reference, from FIPS Figure 5. The response is visible in Figure 12.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_ai_2.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 12: ChatGPT Prompt 2</figcaption>
+</figure>
+</div>
+<p>The code when given the second prompt also synthesized once the functions referenced were developed. Regardless, the LLM’s use of for loops in its Verilog code was concerning. While the accuracy and results of its code was not analyzed or tested, I suspect that this would cause issues, especially since it instantiates three separate for loops. I believe that the pseudocode pushed the AI in a different direction compared to when given solely a word-based prompt.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

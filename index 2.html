@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>labs – E155 Portfolio</title>
+<title>E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,7 +34,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -72,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -90,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -98,12 +97,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./labs.html" aria-current="page"> 
+    <a class="nav-link" href="./labs.html"> 
 <span class="menu-text">Labs</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./project.html"> 
-<span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./resources.html"> 
@@ -120,74 +115,37 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#e155-labs" id="toc-e155-labs" class="nav-link active" data-scroll-target="#e155-labs">E155 Labs</a>
-  <ul class="collapse">
-  <li><a href="#lab-1-fpga-and-mcu-testing-and-setup" id="toc-lab-1-fpga-and-mcu-testing-and-setup" class="nav-link" data-scroll-target="#lab-1-fpga-and-mcu-testing-and-setup">Lab 1: FPGA and MCU Testing and Setup</a></li>
-  <li><a href="#lab-2-multiplexed-7-segment-display" id="toc-lab-2-multiplexed-7-segment-display" class="nav-link" data-scroll-target="#lab-2-multiplexed-7-segment-display">Lab 2: Multiplexed 7-Segment Display</a></li>
-  <li><a href="#lab-3-keypad-scanner" id="toc-lab-3-keypad-scanner" class="nav-link" data-scroll-target="#lab-3-keypad-scanner">Lab 3: Keypad Scanner</a></li>
-  <li><a href="#lab-4-digital-audio" id="toc-lab-4-digital-audio" class="nav-link" data-scroll-target="#lab-4-digital-audio">Lab 4: Digital Audio</a></li>
-  <li><a href="#lab-5-interrupts" id="toc-lab-5-interrupts" class="nav-link" data-scroll-target="#lab-5-interrupts">Lab 5: Interrupts</a></li>
-  <li><a href="#lab-6-the-internet-of-things-and-serial-peripheral-interface" id="toc-lab-6-the-internet-of-things-and-serial-peripheral-interface" class="nav-link" data-scroll-target="#lab-6-the-internet-of-things-and-serial-peripheral-interface">Lab 6: The Internet of Things and Serial Peripheral Interface</a></li>
-  <li><a href="#lab-7-the-advanced-encryption-standard" id="toc-lab-7-the-advanced-encryption-standard" class="nav-link" data-scroll-target="#lab-7-the-advanced-encryption-standard">Lab 7: The Advanced Encryption Standard</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<div class="quarto-about-jolla">
+  <img src="images/headshot.jpg" class="about-image
+  round " style="height: 15em; width: 15em;">
+ <header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">E155 Portfolio</h1>
+</div>
+<div class="quarto-title-meta">
+  </div>
+</header><main class="content" id="quarto-document-content">
+<p>Thomas Lilygren is a senior engineering major at Harvey Mudd College with a keen interest in electrical and systems engineering. His career aspirations involve combining his electrical engineering skills with his business internship experience and economics concentration through the development of his own business. In his free time, he enjoys golfing, climbing, and reading philosophy. Join him on his journey as he explores the fascinating and expansive world of microprocessor design!</p>
 
 
-
-
-<section id="e155-labs" class="level1">
-<h1>E155 Labs</h1>
-<section id="lab-1-fpga-and-mcu-testing-and-setup" class="level2">
-<h2 class="anchored" data-anchor-id="lab-1-fpga-and-mcu-testing-and-setup"><a href="./labs/lab1/e155-lab1.html">Lab 1: FPGA and MCU Testing and Setup</a></h2>
-<p>Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.</p>
-</section>
-<section id="lab-2-multiplexed-7-segment-display" class="level2">
-<h2 class="anchored" data-anchor-id="lab-2-multiplexed-7-segment-display"><a href="./labs/lab2/e155-lab2.html">Lab 2: Multiplexed 7-Segment Display</a></h2>
-<p>This lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits</p>
-</section>
-<section id="lab-3-keypad-scanner" class="level2">
-<h2 class="anchored" data-anchor-id="lab-3-keypad-scanner"><a href="./labs/lab3/e155-lab3.html">Lab 3: Keypad Scanner</a></h2>
-<p>Lab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.</p>
-</section>
-<section id="lab-4-digital-audio" class="level2">
-<h2 class="anchored" data-anchor-id="lab-4-digital-audio"><a href="./labs/lab4/e155-lab4.html">Lab 4: Digital Audio</a></h2>
-<p>Lab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker.</p>
-</section>
-<section id="lab-5-interrupts" class="level2">
-<h2 class="anchored" data-anchor-id="lab-5-interrupts"><a href="./labs/lab5/e155-lab5.html">Lab 5: Interrupts</a></h2>
-<p>Lab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction.</p>
-</section>
-<section id="lab-6-the-internet-of-things-and-serial-peripheral-interface" class="level2">
-<h2 class="anchored" data-anchor-id="lab-6-the-internet-of-things-and-serial-peripheral-interface"><a href="./labs/lab6/e155-lab6.html">Lab 6: The Internet of Things and Serial Peripheral Interface</a></h2>
-<p>Lab 6 description</p>
-</section>
-<section id="lab-7-the-advanced-encryption-standard" class="level2">
-<h2 class="anchored" data-anchor-id="lab-7-the-advanced-encryption-standard"><a href="./labs/lab7/e155-lab7.html">Lab 7: The Advanced Encryption Standard</a></h2>
-<p>Lab 7 description</p>
-
-
-</section>
-</section>
-
-</main> <!-- /main -->
+</main> 
+  <hr class="about-sep">
+   <div class="about-links">
+  <a href="https://www.linkedin.com/in/thomas-lilygren/" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+  <a href="https://github.com/tlilygren" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+</div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     

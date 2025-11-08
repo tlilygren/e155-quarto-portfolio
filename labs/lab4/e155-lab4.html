@@ -8,7 +8,7 @@
 
 <meta name="author" content="Thomas Lilygren">
 <meta name="dcterms.date" content="2025-09-22">
-<meta name="description" content="Lab 4 description">
+<meta name="description" content="Lab 4 employs two timer peripherals within the STM32L432KCU to play Für Elise and Happy Birthday">
 
 <title>Lab 4: Digital Audio – E155 Portfolio</title>
 <style>
@@ -105,6 +105,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Labs</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
@@ -119,8 +123,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a></li>
+  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
+  <ul class="collapse">
+  <li><a href="#electric-schematic" id="toc-electric-schematic" class="nav-link" data-scroll-target="#electric-schematic">Electric Schematic</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ai-prototype" id="toc-ai-prototype" class="nav-link" data-scroll-target="#ai-prototype">AI Prototype</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -132,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Lab 4 description
+    Lab 4 employs two timer peripherals within the STM32L432KCU to play Für Elise and Happy Birthday
   </div>
 </div>
 
@@ -161,8 +180,95 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This lab serves as an in-depth introductioin to the STM32L432KCU timer peripherals. Proper configuration of these peripherals allows Fur Elise and Happy Birthday to play based on a set of input frequencies and note durations.</p>
+</section>
+<section id="design-and-testing" class="level2">
+<h2 class="anchored" data-anchor-id="design-and-testing">Design and Testing</h2>
+<p>Timers 15 and 16 were selected to carry out this lab. Timer 15 controls note duration while Timer 16 modulates the frequency for a given input. For both timers, special attention must be paid to the prescalar (PSC) and auto-reload register (ARR) values. The prescalar value divides the 40 MHz input clock and controls measurement resolution, while the auto-reload register value determines the absolute maximum and minimum frequency and duration values that can be achieved at a given prescalar. Both registers for both timers are 16-bits, meaning careful attention must be kept to ensure neither overflows throughout the duration of the songs. For this application, PSC values for both timers were held constant at a value that preserves resolution while modulating the ARR values for the input at a given time. Timer 16 was configured in an alternate mode function for proper GPIO behavior, and the square wave structure relied on the compare-control register to always generate a 50% duty cycle.</p>
+</section>
+<section id="calculations" class="level2">
+<h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
+<p>Both timer operated with 16-bit ARR and PSC registers that must be carefully configured to ensure a full range of operability with reliable resolution measurements. Maximizing the ARR and PSC values at 65535 yields the maximum duration the MCU can play a note and the minimum frequency that note could be. By minimizing these values to 0, the minimum note duration and maximum note frequency can be determined. Refer to Figures 1-4 for these calculations.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2591.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Minimum Duration Calculation</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2590.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Maximum Duration Calculation</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2592.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: Minimum Frequency Calculation</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2593.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Maximum Frequency Calculation</figcaption>
+</figure>
+</div>
+<p>Timer duration resolution can be determined by taking the input frequency of 40 MHz and dividing it by the prescalar. Taking this new frequency and taking its inverse yields the time step between counter ticks. This tick resolution should be capabale of handling minute time changes on the millisecond scale. The frequency output should yield less than 1% error for frequencies between 220 and 1000 Hz. For the preset prescalar, the ARR values for these frequency bounds were determined. Since this value can only be an integer, these values were then rounded and the output frequency for those rounded ARR values were computed. Error for each of these frequencies were well within the 1% error bounds as shown in Figure 6.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2595.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: Timer 15 Duration Resolution</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2594.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: Timer 16 Frequency Resolution</figcaption>
+</figure>
+</div>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
+<section id="electric-schematic" class="level3">
+<h3 class="anchored" data-anchor-id="electric-schematic">Electric Schematic</h3>
+<p>Figure 7 displays the electronic schematic for the entire system. The square wave holding the note was output on the PA6 GPIO pin and fed into a potentiometer for volume control. The output from this potentiometer was fed into the LM386 audio amplifier and the sound was produced with an 8-ohm, 4-Watt speaker.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IMG_2596.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 7: Electronic Schematic</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>This lab meets all excellence specs, providing proper calculations, clear sound, and multiple songs capable of being played. Successful implementation was confirmed by listening to the sound output and using print debug statements to see if the output frequency and durations matched the inputs.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In all, this lab took about 20 productive hours. Aside from familiarizing myself with the timer registers for proper initialization and duty cycle behavior, the biggest setback was not realizing that the GPIO pins must be configured in alternate mode. Once this was figured out, debugging progressed much faster as I could see where the script was problematic.</p>
+</section>
+<section id="ai-prototype" class="level2">
+<h2 class="anchored" data-anchor-id="ai-prototype">AI Prototype</h2>
+<p>ChatGPT’s capability at setting up this lab was tested by prompting: “What timers should I use on the STM32L432KC to generate frequencies ranging from 220Hz to 1kHz? What’s the best choice of timer if I want to easily connect it to a GPIO pin? What formulae are relevant, and what registers need to be set to configure them properly?”</p>
+<p>The AI prepared a promising response, providing accurate formulae, configuring registers with CMSIS, and mentioning proper timers. It ends up choosing Timer 3, which is not concerning, but given its configuration with the CCR1 register, it fails to enable proper outputs that would permit sound to play.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-11-05 at 1.24.37 PM.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 8: ChatGPT response to AI Prototype Prompt</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-11-05 at 1.25.02 PM.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 9: Response Continued</figcaption>
+</figure>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
