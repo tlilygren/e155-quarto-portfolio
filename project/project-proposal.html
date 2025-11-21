@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Thomas Lilygren">
-<meta name="dcterms.date" content="2025-10-06">
-<meta name="description" content="Lab 6 provides an introduction to SPI and USART communication, implementing an HTML webpage to control and measure temperature readings from the DS1722 temperature sensor.">
+<meta name="author" content="Thomas Lilygren and Leilani Elkaslasy">
+<meta name="dcterms.date" content="2025-11-04">
+<meta name="description" content="This proposal outlines the methodology, procedure, and specifications to convert the square wave readings from a barcode scanner to synth notes for the E155 final project.">
 
-<title>Lab 6: The Internet of Things and Serial Peripheral Interface – E155 Portfolio</title>
+<title>Binary Beats Project Proposal – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -93,23 +93,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../labs.html"> 
+    <a class="nav-link" href="../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../project.html"> 
+    <a class="nav-link" href="../project.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../resources.html"> 
+    <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -128,16 +128,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a></li>
+  <li><a href="#project-design-and-overview" id="toc-project-design-and-overview" class="nav-link active" data-scroll-target="#project-design-and-overview">Project Design and Overview</a></li>
+  <li><a href="#fpga-design" id="toc-fpga-design" class="nav-link" data-scroll-target="#fpga-design">FPGA Design</a></li>
+  <li><a href="#mcu-design" id="toc-mcu-design" class="nav-link" data-scroll-target="#mcu-design">MCU Design</a></li>
   <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
-  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
-  <ul class="collapse">
-  <li><a href="#electric-schematic" id="toc-electric-schematic" class="nav-link" data-scroll-target="#electric-schematic">Electric Schematic</a></li>
-  </ul></li>
-  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#ai-prototype" id="toc-ai-prototype" class="nav-link" data-scroll-target="#ai-prototype">AI Prototype</a></li>
+  <li><a href="#expected-challenges" id="toc-expected-challenges" class="nav-link" data-scroll-target="#expected-challenges">Expected Challenges</a></li>
+  <li><a href="#work-plan" id="toc-work-plan" class="nav-link" data-scroll-target="#work-plan">Work Plan</a></li>
+  <li><a href="#bill-of-materials" id="toc-bill-of-materials" class="nav-link" data-scroll-target="#bill-of-materials">Bill of Materials</a></li>
+  <li><a href="#project-specifications" id="toc-project-specifications" class="nav-link" data-scroll-target="#project-specifications">Project Specifications</a></li>
   </ul>
 </nav>
     </div>
@@ -146,12 +144,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 6: The Internet of Things and Serial Peripheral Interface</h1>
+<h1 class="title">Binary Beats Project Proposal</h1>
 </div>
 
 <div>
   <div class="description">
-    Lab 6 provides an introduction to SPI and USART communication, implementing an HTML webpage to control and measure temperature readings from the DS1722 temperature sensor.
+    This proposal outlines the methodology, procedure, and specifications to convert the square wave readings from a barcode scanner to synth notes for the E155 final project.
   </div>
 </div>
 
@@ -161,14 +159,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Thomas Lilygren </p>
+             <p>Thomas Lilygren and Leilani Elkaslasy </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 6, 2025</p>
+      <p class="date">November 4, 2025</p>
     </div>
   </div>
   
@@ -180,67 +178,29 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This lab introduces SPI communication and the Internet of Things. The DS1722 temperature sensor records the ambient temperature and sends the data to the STM32L432KCU MCU. Temperature data is transferred via USART to a local website hosted by the ESP8266. Temperature resolution and LED control options are presented on the website to modify MCU and temperature sensor behavior.</p>
+<section id="project-design-and-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-design-and-overview">Project Design and Overview</h2>
 </section>
-<section id="design-and-testing" class="level2">
-<h2 class="anchored" data-anchor-id="design-and-testing">Design and Testing</h2>
-<p>Website features for controlling an external LED, the temperature resolution, and temperature display were implemented with HTML code and transferred to the webiste with USART. Temperature resolution can be configured between 8 and 12 bits. Resolution selections write to the configuration register in the DS1722. Temperature data is continuously read as two separate character values, with the signed most significant character being sent first followed by the least significant character repesenting the decimal portion. The least significant character is corrected by a factor of 256 to get it to its intended fractional value. To combat the high-frequency noise interfering MISO communication, a low-pass filter was constrcuted with the 10 pF capcitor and a 1.6 kOhm resistor. These values were selected such that the corner frequency (10 MHz) is 5 times that of the baud rate (2 MHz).</p>
+<section id="fpga-design" class="level2">
+<h2 class="anchored" data-anchor-id="fpga-design">FPGA Design</h2>
+</section>
+<section id="mcu-design" class="level2">
+<h2 class="anchored" data-anchor-id="mcu-design">MCU Design</h2>
 </section>
 <section id="calculations" class="level2">
 <h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
-<p>The website control a green external LED with two buttons. When the on button is pressed, the LED activates, and turns off once the off button is pressed. The LED is powered with 5V and has a forward voltage drop of 1.88 V. Current must be limited to within 10 mA. Sufficient brightness can be achieved with a current above 5 mA, so a 560 Ohm resistor was selected based on the calculation below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2598.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 1: LED Resistor Calculation</figcaption>
-</figure>
-</div>
 </section>
-<section id="technical-documentation" class="level2">
-<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
-<section id="electric-schematic" class="level3">
-<h3 class="anchored" data-anchor-id="electric-schematic">Electric Schematic</h3>
-<p>With the external LED, the primary connections were between the DS1722 sensor and the MCU. USART connections between the MCU and ESP8266 were handled internally within the E155 development board and are thus excluded. SPI pins, 5V volage, and ground connections were directly connected to the receiving pins within the temperature sensor as indicated below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2597.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 2: Electric Schematic</figcaption>
-</figure>
-</div>
+<section id="expected-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="expected-challenges">Expected Challenges</h2>
 </section>
+<section id="work-plan" class="level2">
+<h2 class="anchored" data-anchor-id="work-plan">Work Plan</h2>
 </section>
-<section id="results-and-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
-<p>SPI communication was confirmed by reading the MISO and MOSI lines with the Logic Analyzer. The configuration write register is 0x80 which is clear in the first SPI transaction. The MSB value is later received as indicated by the reading of register 0x02 and a dummy variable is sent after to complete the transaction. Between this 16-bit transaction, the clock enable purposefully lowers and rises again to read the LSB values in the 0x01 register. The second values in each MISO transaction indicate the MSB and LSB values, which are then converted to temperature readings.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Horizontal.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 3: SPI Demonstration over Logic Analyzer</figcaption>
-</figure>
-</div>
+<section id="bill-of-materials" class="level2">
+<h2 class="anchored" data-anchor-id="bill-of-materials">Bill of Materials</h2>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>This lab took roughly 20 hours complete. While some obscure MISO behavior is recorded on the logic analyzer, the website successfully controls temperature readings and resolution. I learned a lot about SPI behavior, some HTML code, and USART communication, which will come in handy for the final project. There was a lot of tedious and painful debugging that stumped me, even when all individual aspects appeared to be properly implemented.</p>
-</section>
-<section id="ai-prototype" class="level2">
-<h2 class="anchored" data-anchor-id="ai-prototype">AI Prototype</h2>
-<p>ChatGPT was tested to how efficiently it can write HTML code and produce functioning SPI communication code. The first prompt it was given was: “I’m making a web portal to interface with a temperature sensor. Create a HTML page that looks good and is intuitive to show the temperature, control an LED, and change the precision of the readout.” ChatGPT handled this no problem writing hundreds of lines of code to produce a sleek website that exceeds the bare-bones implementation developed with this lab. ChatGPT certainly has no problem writing functioning HTML code.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Screenshot 2025-11-06 at 1.37.41 PM.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 4: ChatGPT Prompt 1</figcaption>
-</figure>
-</div>
-<p>ChatGPT was given a second prompt to test its SPI writing capabilities: “Write me a C function to carry out a SPI transaction to retrieve a temperature reading from a DS1722 sensor. Make use of CMSIS libraries for the STM32L432KC.” This code employed obscure libraries that were hard to follow and interpret. Even when including these libraries, the code would not run properly on my computer. It’s logic to send and receive data using addresses and dummy values looked promising, but it is clear that the LLM’s HTML writing capabilities is far superior than its SPI communication capabilities.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Screenshot 2025-11-06 at 1.41.37 PM.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 5: ChatGPT Prompt 2</figcaption>
-</figure>
-</div>
+<section id="project-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="project-specifications">Project Specifications</h2>
 
 
 </section>

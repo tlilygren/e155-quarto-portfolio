@@ -42,6 +42,55 @@
     "text": "A discussion on the transition from Verliog to C programming and a critique on my approach to Lab 4."
   },
   {
+    "objectID": "project/project-proposal.html#fpga-design",
+    "href": "project/project-proposal.html#fpga-design",
+    "title": "Binary Beats Project Proposal",
+    "section": "FPGA Design",
+    "text": "FPGA Design"
+  },
+  {
+    "objectID": "project/project-proposal.html#mcu-design",
+    "href": "project/project-proposal.html#mcu-design",
+    "title": "Binary Beats Project Proposal",
+    "section": "MCU Design",
+    "text": "MCU Design"
+  },
+  {
+    "objectID": "project/project-proposal.html#calculations",
+    "href": "project/project-proposal.html#calculations",
+    "title": "Binary Beats Project Proposal",
+    "section": "Calculations",
+    "text": "Calculations"
+  },
+  {
+    "objectID": "project/project-proposal.html#expected-challenges",
+    "href": "project/project-proposal.html#expected-challenges",
+    "title": "Binary Beats Project Proposal",
+    "section": "Expected Challenges",
+    "text": "Expected Challenges"
+  },
+  {
+    "objectID": "project/project-proposal.html#work-plan",
+    "href": "project/project-proposal.html#work-plan",
+    "title": "Binary Beats Project Proposal",
+    "section": "Work Plan",
+    "text": "Work Plan"
+  },
+  {
+    "objectID": "project/project-proposal.html#bill-of-materials",
+    "href": "project/project-proposal.html#bill-of-materials",
+    "title": "Binary Beats Project Proposal",
+    "section": "Bill of Materials",
+    "text": "Bill of Materials"
+  },
+  {
+    "objectID": "project/project-proposal.html#project-specifications",
+    "href": "project/project-proposal.html#project-specifications",
+    "title": "Binary Beats Project Proposal",
+    "section": "Project Specifications",
+    "text": "Project Specifications"
+  },
+  {
     "objectID": "labs.html",
     "href": "labs.html",
     "title": "E155 Labs",
@@ -235,7 +284,7 @@
     "href": "labs/lab6/e155-lab6.html#design-and-testing",
     "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
     "section": "Design and Testing",
-    "text": "Design and Testing\nWebsite features for controlling an external LED, the temperature resolution, and temperature display were implemented with HTML code and transferred to the webiste with USART. Temperature resolution can be configured between 8 and 12 bits. Resolution selections write to the configuration register in the DS1722. Temperature data is continuously read as two separate character values, with the signed most significant character being sent first followed by the least significant character repesenting the decimal portion. The least significant character is corrected by a factor of 256 to get it to its intended fractional value. SPI parameters like the"
+    "text": "Design and Testing\nWebsite features for controlling an external LED, the temperature resolution, and temperature display were implemented with HTML code and transferred to the webiste with USART. Temperature resolution can be configured between 8 and 12 bits. Resolution selections write to the configuration register in the DS1722. Temperature data is continuously read as two separate character values, with the signed most significant character being sent first followed by the least significant character repesenting the decimal portion. The least significant character is corrected by a factor of 256 to get it to its intended fractional value. To combat the high-frequency noise interfering MISO communication, a low-pass filter was constrcuted with the 10 pF capcitor and a 1.6 kOhm resistor. These values were selected such that the corner frequency (10 MHz) is 5 times that of the baud rate (2 MHz)."
   },
   {
     "objectID": "labs/lab6/e155-lab6.html#calculations",
@@ -502,6 +551,41 @@
     "title": "E155 Portfolio",
     "section": "",
     "text": "Thomas Lilygren is a senior engineering major at Harvey Mudd College with a keen interest in electrical and systems engineering. His career aspirations involve combining his electrical engineering skills with his business internship experience and economics concentration through the development of his own business. In his free time, he enjoys golfing, climbing, and reading philosophy. Join him on his journey as he explores the fascinating and expansive world of microprocessor design!"
+  },
+  {
+    "objectID": "project/midpoint.html",
+    "href": "project/midpoint.html",
+    "title": "Binary Beats Midpoint Check-in",
+    "section": "",
+    "text": "Barcode Beats is well underway as the project timeline reaches its halfway mark. This project aims to take a barcode scanner and “hack” it into a synth like instrument. In order to achieve this a square wave will be found on the hardware of the scanner proportional to the barcode size its reading and that square wave will then enter a filtering system. First, on the FPGA it will be filtered and decimated to improve the sound. Then the data will be packaged and sent using SPI to the MCU where a DDS and DAC will convert the signal to an analog sin wave that will be sent to an audio amplifier and a speaker to be heard in real time!"
+  },
+  {
+    "objectID": "project/midpoint.html#introduction",
+    "href": "project/midpoint.html#introduction",
+    "title": "Binary Beats Midpoint Check-in",
+    "section": "",
+    "text": "Barcode Beats is well underway as the project timeline reaches its halfway mark. This project aims to take a barcode scanner and “hack” it into a synth like instrument. In order to achieve this a square wave will be found on the hardware of the scanner proportional to the barcode size its reading and that square wave will then enter a filtering system. First, on the FPGA it will be filtered and decimated to improve the sound. Then the data will be packaged and sent using SPI to the MCU where a DDS and DAC will convert the signal to an analog sin wave that will be sent to an audio amplifier and a speaker to be heard in real time!"
+  },
+  {
+    "objectID": "project/midpoint.html#progress",
+    "href": "project/midpoint.html#progress",
+    "title": "Binary Beats Midpoint Check-in",
+    "section": "Progress",
+    "text": "Progress\n\nHardware\nAt this halfway mark, the riskiest part of the project has been completed and the barcode has been located and wired out of the scanner - a square wave within audible range has been confirmed both on the oscilloscope and by listening to the signal on a lab speaker.\n\n\n\nFigure 1: Barcode Readings on Oscilloscope\n\n\n\n\n\nFigure 2: Hardware Oscilloscope Signal Source\n\n\n\n\nFPGA\nThe FPGA verilog has been written to implement an FIR filter and 4x downsampling of the input signal. The FPGA filter was then tested using a testbench and confirmed to be functional.\n\nFilter Design\n\n\n\nFigure 3: Simulated Low-Pass Filter Performance in MATLAB\n\n\n\n\n\nFigure 4: Simulated Low-Pass Filter with Decimation\n\n\nThe primary goal in designing the desired FIR filter was to stay within the 8-tap hardware limit of the FPGA while producing the roundest version of the input square wave. While not a traditional goal it was hypothesized that round sounds would sound coolest. In order to find the roundest possible output with an 8 tap low pass FIR filter a matlab script was designed to sweep the cutoff frequency and find the lowest total harmonic distortion such that the output was the smoothest. Thus the “roundest” coefficients were calculated and visualized (Figure 3). To emphasize the distortion that will ultimately be implemented with the MCU’s DDS peripheral, the low-pass filter was downsampled by a magnitude of 4, leading to the spectrum waveforms outlined in Figure 4.\nA top-level overview of the FPGA layout is illustrated in Figure 5. The governing FPGA clock is implemented with the 48 MHz internal High-Speed Oscillator (HSOSC), and divided to 48 kHz with a counter for sampling. The square-wave barcode signal is first passed through a synchronizer module to eliminate issues with metastability before filtering and decimation are implemented.\n\n\n\nFigure 5: FPGA Block Diagram\n\n\nThe FIR filter resembles a shift register, with each segment in the register multiplied by a weighted tap coefficient, as outlined in the MATLAB figures above. The shift register and multiplication summation implement the convolution necessary to carry out FIR filtering.\n\n\n\nFigure 6: FIR Filter with Decimation Register Level Schematic\n\n\nTable 1: Tap Coefficient Weights\n\n\n\nCoefficient\nWeight\n\n\n\n\na0\n10\n\n\na1\n33\n\n\na2\n85\n\n\na3\n127\n\n\na4\n127\n\n\na5\n85\n\n\na6\n33\n\n\na7\n10\n\n\n\n\n\nFilter Results and Simulations\n The filter and decimation was tested with random input 11011000 and then the expected output was manually calculated to be 253 which matches the output on the test bench. Confirming the FPGA design is functional!\n The FIR filter was seperated from any bit manipulation and tested in a vacume in order to verify that this aspect of the design was wroking as expected. In order to test the FIR filter an impulse response was input to the filter and the coefficients were output, confirming the FIR filter works."
+  },
+  {
+    "objectID": "project/midpoint.html#future-work-plan",
+    "href": "project/midpoint.html#future-work-plan",
+    "title": "Binary Beats Midpoint Check-in",
+    "section": "Future Work Plan",
+    "text": "Future Work Plan\nWith the remainder of the project timeline the MCU will be programmed making use of the DDS and DAC and then the Scanner, FPGA, MCU and speaker will be integrated.\nTable 2: Work Plan Through Demo Day\n\n\n\nDates\nBenchmarks\n\n\n\n\n11/21 - 11/25\nDAC and DDS implementation and testing\n\n\n11/28 - 11/30\nSPI implementation and confirmation\n\n\n12/1 - 12/2\nFull system integration, debugging, and report writing\n\n\n12/3 - 12/4\nFinal checkoff and demo day\n\n\n\n\nSPI Communication Discussion\n\n\nMCU Plan\nCommunication between the FPGA and MCU will be carried out with SPI. The 32-bit convolution sum will be sent from the FPGA to the MCU for DDS manipuation and DAC structuring. To carry out this process, the MCU will employ the SPI peripheral, the DMA peripheral will store the sine look up table that the FPGA output will direct, and the DAC peripheral will reconstruct and output the frequency-modulated signal.\nThe SPI code will be derived from the Lab 7 and modified for the 32-bit data transfer. The DMA and DAC peripherals will be implemented from scratch, according to the timeline described in Table 2.\n\nSPI Communication Disscussion\nThe 32-bit convolution sum will be sent from the FPGA to the MCU for DDS manipulation and eventual DAC structuring. The calculations in Figure 8 demonstrate the corrected sampling period for the decimated sigal relative to selected 1 MHz - 5 MHz SPI communication rate. The math demonstrates that the 4-byte communication period within the specified range does not introduce significant timing issues that would throw off measurements.\n\n\n\nFigure 8: SPI Communication Rate Justification\n\n\nFor this checkoff, we are proving that the signal acquired by the barcode scanner can produce sound that varies based on bar width. The scanner signal is directly fed into the LM386 audio amplifier as demonstrated in Figure 9. The scanner audibly produces varying tones based on distance from the barcode and the bar widths, as desired. This test not only proves the concept of the project, but also serves as a reference for when we modulate the signal’s behavior.\n\n\n\nFigure 9: Current Amplifier Circuit"
+  },
+  {
+    "objectID": "project/midpoint.html#conclusion",
+    "href": "project/midpoint.html#conclusion",
+    "title": "Binary Beats Midpoint Check-in",
+    "section": "Conclusion",
+    "text": "Conclusion\nAs the midway point arrives, this project is shaping up on track! The hardware has been tested and proven successful and the FPGA FIR filter and down sampling has been created and proven! In order to drive this project home the DAC on the MCU will be integrated ringing in the next generation of Barcode Beats."
   },
   {
     "objectID": "resources.html",
