@@ -42,6 +42,13 @@
     "text": "A discussion on the transition from Verliog to C programming and a critique on my approach to Lab 4."
   },
   {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "E155 Final Project",
+    "section": "",
+    "text": "E155 Final Project\nBarcode Beats Midpoint Progress This report showcases the progress that our team made by the midpoint check off. The riskiest element of the project, deconstructing the barcode scanner and isolating the infrared signal readings, and the decimated FIR filter in the FPGA are shown to work properly. Focus will shift to the MCU portion of the project before the final check off."
+  },
+  {
     "objectID": "project/project-proposal.html#fpga-design",
     "href": "project/project-proposal.html#fpga-design",
     "title": "Binary Beats Project Proposal",
