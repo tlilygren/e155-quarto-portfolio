@@ -46,7 +46,21 @@
     "href": "project.html",
     "title": "E155 Final Project",
     "section": "",
-    "text": "E155 Final Project\nBarcode Beats Midpoint Progress This report showcases the progress that our team made by the midpoint check off. The riskiest element of the project, deconstructing the barcode scanner and isolating the infrared signal readings, and the decimated FIR filter in the FPGA are shown to work properly. Focus will shift to the MCU portion of the project before the final check off."
+    "text": "This report showcases the progress that our team made by the midpoint check off. The riskiest element of the project, deconstructing the barcode scanner and isolating the infrared signal readings, and the decimated FIR filter in the FPGA are shown to work properly. Focus will shift to the MCU portion of the project before the final check off.\n\n\n\nA semester of growth and perseverance culminate in the deconstruction and modification of a barcode scanner. The portfolio tracks the entire project, encapsulating the role each element plays in frequency-modulated tones, the authors’ reflections on the project and the class, and acknowledges those who made this class a truly memorable experience."
+  },
+  {
+    "objectID": "project.html#barcode-beats-midpoint-progress",
+    "href": "project.html#barcode-beats-midpoint-progress",
+    "title": "E155 Final Project",
+    "section": "",
+    "text": "This report showcases the progress that our team made by the midpoint check off. The riskiest element of the project, deconstructing the barcode scanner and isolating the infrared signal readings, and the decimated FIR filter in the FPGA are shown to work properly. Focus will shift to the MCU portion of the project before the final check off."
+  },
+  {
+    "objectID": "project.html#barcode-beats-final-report",
+    "href": "project.html#barcode-beats-final-report",
+    "title": "E155 Final Project",
+    "section": "",
+    "text": "A semester of growth and perseverance culminate in the deconstruction and modification of a barcode scanner. The portfolio tracks the entire project, encapsulating the role each element plays in frequency-modulated tones, the authors’ reflections on the project and the class, and acknowledges those who made this class a truly memorable experience."
   },
   {
     "objectID": "project/project-proposal.html#fpga-design",
@@ -102,7 +116,7 @@
     "href": "labs.html",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker.\n\n\n\nLab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction.\n\n\n\nLab 6 description\n\n\n\nLab 7 description"
+    "text": "Lab 1 prompts the assembly of an iCE40 UP5K FPGA development board to house a UPduino v3.1 MCU. Proper board functionality is confirmed through a 7-segment LED display script written in Verilog.\n\n\n\nThis lab employs time-multiplexing to minimize the number of necessary GPIO pin connections to display two indpendent hexadecimal digits\n\n\n\nLab 3 requires successfully programming a 4x4 keypad to produce hexadecimal digits on a dual seven-segment display.\n\n\n\nLab 4 takes a deep dive into the peripherals of the STM32L432KCU MCU to activate appropriate timers and translate a given array of frequencies and durations to play music from an external speaker.\n\n\n\nLab 5 prompts the use of interrupts to efficiently interpret the quadratures of a motor to determine its angular velocity and direction.\n\n\n\nLab 6 introduces communication protocols like USART and SPI to transmit temperature readings of variable resolution from the DS1722 temperature sensor to a local HTML site.\n\n\n\nLab 7 tackles the Advanced Encryption Standard (AES). The MCU sends a plaintext message with a key over SPI to the FPGA for encryption. Additional SPI transactions send the encrypted message from the FPGA back to the MCU for validation."
   },
   {
     "objectID": "labs.html#lab-1-fpga-and-mcu-testing-and-setup",
@@ -144,14 +158,14 @@
     "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 6 description"
+    "text": "Lab 6 introduces communication protocols like USART and SPI to transmit temperature readings of variable resolution from the DS1722 temperature sensor to a local HTML site."
   },
   {
     "objectID": "labs.html#lab-7-the-advanced-encryption-standard",
     "href": "labs.html#lab-7-the-advanced-encryption-standard",
     "title": "E155 Labs",
     "section": "",
-    "text": "Lab 7 description"
+    "text": "Lab 7 tackles the Advanced Encryption Standard (AES). The MCU sends a plaintext message with a key over SPI to the FPGA for encryption. Additional SPI transactions send the encrypted message from the FPGA back to the MCU for validation."
   },
   {
     "objectID": "posts/lab-1-reflection.html",
