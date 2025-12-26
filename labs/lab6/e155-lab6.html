@@ -205,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
 <p>With the external LED, the primary connections were between the DS1722 sensor and the MCU. USART connections between the MCU and ESP8266 were handled internally within the E155 development board and are thus excluded. SPI pins, 5V volage, and ground connections were directly connected to the receiving pins within the temperature sensor as indicated below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/IMG_2597.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/Lab6_schematic1.jpg" class="img-fluid figure-img"></p>
 <figcaption>Figure 2: Electric Schematic</figcaption>
 </figure>
 </div>
@@ -227,14 +227,42 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ai-prototype" class="level2">
 <h2 class="anchored" data-anchor-id="ai-prototype">AI Prototype</h2>
-<p>ChatGPT was tested to how efficiently it can write HTML code and produce functioning SPI communication code. The first prompt it was given was: “I’m making a web portal to interface with a temperature sensor. Create a HTML page that looks good and is intuitive to show the temperature, control an LED, and change the precision of the readout.” ChatGPT handled this no problem writing hundreds of lines of code to produce a sleek website that exceeds the bare-bones implementation developed with this lab. ChatGPT certainly has no problem writing functioning HTML code.</p>
+<p>ChatGPT was tested to how efficiently it can write HTML code and produce functioning SPI communication code. The first prompt it was given was:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="LLM Prompt #1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+LLM Prompt #1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’m making a web portal to interface with a temperature sensor. Create a HTML page that looks good and is intuitive to show the temperature, control an LED, and change the precision of the readout.</p>
+</div>
+</div>
+<p>ChatGPT handled this no problem writing hundreds of lines of code to produce a sleek website that exceeds the bare-bones implementation developed with this lab. ChatGPT certainly has no problem writing functioning HTML code.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Screenshot 2025-11-06 at 1.37.41 PM.png" class="img-fluid figure-img"></p>
 <figcaption>Figure 4: ChatGPT Prompt 1</figcaption>
 </figure>
 </div>
-<p>ChatGPT was given a second prompt to test its SPI writing capabilities: “Write me a C function to carry out a SPI transaction to retrieve a temperature reading from a DS1722 sensor. Make use of CMSIS libraries for the STM32L432KC.” This code employed obscure libraries that were hard to follow and interpret. Even when including these libraries, the code would not run properly on my computer. It’s logic to send and receive data using addresses and dummy values looked promising, but it is clear that the LLM’s HTML writing capabilities is far superior than its SPI communication capabilities.</p>
+<p>ChatGPT was given a second prompt to test its SPI writing capabilities:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="LLM Prompt #2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+LLM Prompt #2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write me a C function to carry out a SPI transaction to retrieve a temperature reading from a DS1722 sensor. Make use of CMSIS libraries for the STM32L432KC.</p>
+</div>
+</div>
+<p>This code employed obscure libraries that were hard to follow and interpret. Even when including these libraries, the code would not run properly on my computer. It’s logic to send and receive data using addresses and dummy values looked promising, but it is clear that the LLM’s HTML writing capabilities is far superior than its SPI communication capabilities.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Screenshot 2025-11-06 at 1.41.37 PM.png" class="img-fluid figure-img"></p>

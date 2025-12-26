@@ -216,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The hardware layout for this lab was relatively simple. The motor housed six total connections: an external power supply and ground, two quadrature sensor signals, a 5V quadrature sensor voltage supply, and a quadrature sensor ground. The first two connections were connected to an external power supply capable of generating up to 20V DC. Quadrature A was fed into pin the five-volt tolerant PA6 pin and the signal from Quadrature B was fed into the five-volt tolerant PA8 pin, both on the MCU. The 5V quadrature sensor voltage supply and ground were both provided by the MCU.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/lab5_tl_eschem.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/Lab5_schematic.jpg" class="img-fluid figure-img"></p>
 <figcaption>Figure 3: Motor Electrical Schematic</figcaption>
 </figure>
 </div>
@@ -238,7 +238,21 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ai-prototype" class="level2">
 <h2 class="anchored" data-anchor-id="ai-prototype">AI Prototype</h2>
-<p>To test ChatGPT’s capability at coding MCU interrupts for quadrature measurements, it was given the following prompt: “Write me interrupt handlers to interface with a quadrature encoder. I’m using the STM32L432KC, what pins should I connect the encoder to in order to allow it to easily trigger the interrupts?” I added a slight modification to prohibit ChatGPT from using HAL to better compare its code and mine. The code it provides can be found in Figures 4 and 5.</p>
+<p>To test ChatGPT’s capability at coding MCU interrupts for quadrature measurements, it was given the following prompt:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="LLM Prompt">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+LLM Prompt
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write me interrupt handlers to interface with a quadrature encoder. I’m using the STM32L432KC, what pins should I connect the encoder to in order to allow it to easily trigger the interrupts?</p>
+</div>
+</div>
+<p>I added a slight modification to prohibit ChatGPT from using HAL to better compare its code and mine. The code it provides can be found in Figures 4 and 5.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab5_tl_ai_prototype2.jpg" class="img-fluid figure-img"></p>
@@ -251,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Figure 5: ChatGPT interrupt handler</figcaption>
 </figure>
 </div>
-<p>ChatGPT’s code appears to be solid. It uses built-in CMSIS more frequently in both the main function and interrupt handler, whereas I opted for specific bit setting for more clarity. ChatGPT opted to have the counter increase in both the positive and negative direction, depending on the direction of the motor, instead of specifically coding for “CW” and “CCW,” like I had. This came off as more elegant to me and would be something I would implement when presented with a similar problem in the future.</p>
+<p>ChatGPT’s code appears to be solid. It uses built-in CMSIS more frequently in both the main function and interrupt handler, whereas I opted for specific bit setting for more clarity. ChatGPT opted to have the counter increase in both the positive and negative direction, depending on the direction of the motor, instead of specifically coding for “CW” and “CCW” like I had. This came off as more elegant to me and would be something I would implement when presented with a similar problem in the future.</p>
 
 
 </section>
