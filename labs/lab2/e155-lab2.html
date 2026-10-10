@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -130,7 +159,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a></li>
-  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
+  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a>
+  <ul class="collapse">
+  <li><a href="#pnp-transistor-base-resistor-calculation" id="toc-pnp-transistor-base-resistor-calculation" class="nav-link" data-scroll-target="#pnp-transistor-base-resistor-calculation">PNP Transistor Base Resistor Calculation</a></li>
+  <li><a href="#led-resistor-calculations" id="toc-led-resistor-calculations" class="nav-link" data-scroll-target="#led-resistor-calculations">LED Resistor Calculations</a></li>
+  </ul></li>
   <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
   <ul class="collapse">
   <li><a href="#block-diagrams" id="toc-block-diagrams" class="nav-link" data-scroll-target="#block-diagrams">Block Diagrams</a></li>
@@ -195,26 +228,46 @@ ul.task-list li input[type="checkbox"] {
 <section id="calculations" class="level2">
 <h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
 <p>The maximum allowed current sink for the FPGA GPIO switch pins is 8 mA according to the iCE40 UltraPlus 5K datasheet. Using this knowledge along with the known 3.3 V supply entering the emitter pin and known 0.7 V drop between the emitter and base pin, the resistor in series with the 2N3906 PNP transistor’s base pin and the FPGA can be calculated with the formula in Figure 1. Aiming for a current gain of 10, the voltage sinking in the FPGA should be 0.8 mA, well below the established threshold.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_pnp_calc.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 1: PNP base transistor calculation</figcaption>
-</figure>
-</div>
-<p>The seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA’s GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Figure 2 below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_sevenseg_calc_USE.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 2: Seven-Segment Display current calculations</figcaption>
-</figure>
-</div>
-<p>The five external LEDs were green, meaning they each had a voltage drop of around 1.8 V. Sufficient luminescence is obtained with a current of around 7-10 mA. Understanding that the input voltage from the FPGA is 3.3 V, Ohm’s Law was used to find the satisfactory resistor value of 200 Ohms. This calculation can be found below in Figure 3.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab2_externalLED_calcs.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 3: External LED current calculations</figcaption>
-</figure>
-</div>
+<p>According to the iCE40UP5K datasheet, the FPGA’s GPIO pins can sink a maximum of 8 mA.</p>
+<section id="pnp-transistor-base-resistor-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="pnp-transistor-base-resistor-calculation">PNP Transistor Base Resistor Calculation</h3>
+<section id="base-current-calculation" class="level4">
+<h4 class="anchored" data-anchor-id="base-current-calculation">Base Current Calculation</h4>
+<p>Here, <span class="math inline">\(I_{B}\)</span> represents the current flow through the base terminal and <span class="math inline">\(I_{C}\)</span> denotes the current flow through the collector pin. The PNP transistor operates as a basic switch, so the collector-to-emitter voltage drop, <span class="math inline">\(V_{CE}\)</span>, is the same as <span class="math inline">\(V_{CE(sat)}\)</span>. A <span class="math inline">\(V_{CE(sat)}\)</span> of 0.25 V appears to be most desirable, with a corresponding <span class="math inline">\(I_{C}\)</span> of 10 mAdc and a low <span class="math inline">\(I_{B}\)</span> of 1 mAdc, according to the transistor’s datasheet. Under these same conditions, <span class="math inline">\(V_{BE(sat)}\)</span> has a minimum value of 0.65V. With these known characteristics, the base resistor can be calculated using the equation below:</p>
+<p><span class="math display">\[
+R_{Base} = \frac{V_{E} - V_{BE(sat)}}{I_{B}} \tag{1}
+\]</span> <span class="math display">\[
+R_{Base} = \frac{3.3V - 0.65V}{0.001A}  = 2650\, {\Omega}
+\]</span> <span class="math display">\[
+R_{Base}\, {\approx} \, \mathbf{2.7\,{k\Omega}}
+\]</span></p>
+<p>The seven-segment displays are composed of deep red diodes with a forward voltage of 2 V. These diodes exhibit sufficient birghtness when receiving a current between 1-10 mA. To preserve the functionality of the FPGA’s GPIO pins, a sink current above 8 mA is not advisable. Therefore, a resistor controlling the current between 1 and 5 mA was desired. The calculations for the seven-segment resistor values are shown in Equation 2 below.</p>
+</section>
+</section>
+<section id="led-resistor-calculations" class="level3">
+<h3 class="anchored" data-anchor-id="led-resistor-calculations">LED Resistor Calculations</h3>
+<section id="seven-segment-display" class="level4">
+<h4 class="anchored" data-anchor-id="seven-segment-display">Seven-Segment Display</h4>
+<p><span class="math display">\[
+R_{SEG} = \frac{V_{in}-V_{CE(sat)}-V_{f}}{I} \tag{2}
+\]</span> <span class="math display">\[
+R_{SEG} = \frac{3.3V-0.25V-1.8V}{0.0025} = 500\,{\Omega}
+\]</span> <span class="math display">\[
+R_{SEG} \,{\approx}\,\mathbf{470\,{\Omega}}
+\]</span></p>
+</section>
+<section id="external-leds" class="level4">
+<h4 class="anchored" data-anchor-id="external-leds">External LEDs</h4>
+<p>The five external LEDs were green, meaning they each had a voltage drop of around 1.8 V. Sufficient luminescence is obtained with a current of around 7-10 mA. Understanding that the input voltage from the FPGA is 3.3 V, Ohm’s Law was used to find the satisfactory resistor value of 200 Ohms. This calculation can be found below in Equation 3.</p>
+<p><span class="math display">\[
+R_{LED} = \frac{V_{in}-V_{f}}{I} \tag{3}
+\]</span> <span class="math display">\[
+R_{LED} = \frac{3.3V-1.88V}{0.007} = 203\,{\Omega}
+\]</span> <span class="math display">\[
+R_{LED} \,{\approx}\,\mathbf{200\,{\Omega}}
+\]</span></p>
+</section>
+</section>
 </section>
 <section id="technical-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
@@ -225,7 +278,7 @@ The multiplexer modules instantiates the HSOSC and implements the counter for cl
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_block.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 4: Top module block diagram</figcaption>
+<figcaption>Figure 1: Top module block diagram</figcaption>
 </figure>
 </div>
 </section>
@@ -235,46 +288,46 @@ The multiplexer modules instantiates the HSOSC and implements the counter for cl
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Lab2_schematic_new.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 5: Full System Electronic Schematic. Note: groups of resistors are assumed to have the same value.</figcaption>
+<figcaption>Figure 2: Full System Electronic Schematic. Note: groups of resistors are assumed to have the same value.</figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="results-and-discussion" class="level2">
 <h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
-<p>The external LEDs were confirmed to output the proper binary value through a waveform simulation. All possible switch input combinations were tested and the output sum is present in the waveforms in Figure 6. The two DIP switches were powered low, meaning their bits must be inverted before taking their sum.</p>
+<p>The external LEDs were confirmed to output the proper binary value through a waveform simulation. All possible switch input combinations were tested and the output sum is present in the waveforms in Figure 3. The two DIP switches were powered low, meaning their bits must be inverted before taking their sum.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_ledwaveforms_full.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 6: LEDs module waveforms</figcaption>
+<figcaption>Figure 3: LEDs module waveforms</figcaption>
 </figure>
 </div>
-<p>Figure 7 shows a zoomed-in portion of the LED waveforms in Figure 7. This image allows a closer look into the output (led) values at given switch input values.</p>
+<p>Figure 4 shows a zoomed-in portion of the LED waveforms. This image allows a closer look into the output (led) values at given switch input values.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_ledwaveforms_zoom.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 7: LEDs module waveforms zoomed-in</figcaption>
+<figcaption>Figure 4: LEDs module waveforms zoomed-in</figcaption>
 </figure>
 </div>
-<p>The seven-segment waveforms in Figure 10 are similar to the waveforms showcased in lab 1. Here, the seg outputs and seg_expected outputs are outlined in the same wave signals. Throughout the entire simulation, it is clear that seg is equal to seg_expected, as desired.</p>
+<p>The seven-segment waveforms in Figure 5 are similar to the waveforms showcased in lab 1. Here, the seg outputs and seg_expected outputs are outlined in the same wave signals. Throughout the entire simulation, it is clear that seg is equal to seg_expected, as desired.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_7segwaveforms.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 8: Seven-segment waveforms</figcaption>
+<figcaption>Figure 5: Seven-segment waveforms</figcaption>
 </figure>
 </div>
-<p>The multiplexer module waveforms in Figure 10 were implemented with a nested for loop and assert statements. The simulation duration was lengthy, but the logic and behavior remains consistent.</p>
+<p>The multiplexer module waveforms in Figure 6 were implemented with a nested for loop and assert statements. The simulation duration was lengthy, but the logic and behavior remains consistent.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_muxwaveforms_full.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Figure 9: Multiplexer waveforms</figcaption>
+<figcaption>Figure 6: Multiplexer waveforms</figcaption>
 </figure>
 </div>
-<p>Figure 10, shows a zoomed-in segment of the multiplexer waves in Figure 10. This wave shows that as the multiplexer enable oscillates between zero and one with the modified clock frequency, the output value alternates between the first and second switch values. The nested for loop allows for all possible switch combinations to be tested and confirmed.</p>
+<p>Figure 7 shows a zoomed-in segment of the multiplexer waves. This wave shows that as the multiplexer enable oscillates between zero and one with the modified clock frequency, the output value alternates between the first and second switch values. The nested for loop allows for all possible switch combinations to be tested and confirmed.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_muxwaveforms_zoom.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 10: Multiplexer waveforms zoomed-in</figcaption>
+<figcaption>Figure 7: Multiplexer waveforms zoomed-in</figcaption>
 </figure>
 </div>
 </section>
@@ -301,7 +354,7 @@ LLM Prompt #1
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_ai_nohelp.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 12: Initial prompt to ChatGPT</figcaption>
+<figcaption>Figure 8: Initial prompt to ChatGPT</figcaption>
 </figure>
 </div>
 <p>Unlike last, ChatGPT developed hardware code that synthesized in Lattice Radiant on the first try without any reference code from lab 1. It appears that ChatGPT’s ability to program hardware is improving. Still, its capabilities will be tested when it has a base script to refer to with the following prompt:</p>
@@ -321,7 +374,7 @@ LLM Prompt #2
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lab2_ai_reference.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 13: ChatGPT prompt with lab 1 reference code</figcaption>
+<figcaption>Figure 9: ChatGPT prompt with lab 1 reference code</figcaption>
 </figure>
 </div>
 <p>After providing reference code from lab 1, ChatGPT ran into its first error in that it called a seven-segment display module that it did not create. Once prompted to create the seven-segment display module, it copied the code in the module it had been provided and Lattice Synthesized the project without issue.</p>

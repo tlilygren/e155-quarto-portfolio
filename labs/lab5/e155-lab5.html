@@ -70,6 +70,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -184,6 +187,39 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Lab 5 aims to measure the angular velocity and detect the direction of a spinning motor using two built-in quadrature sensors generating identical square wave signals offset by 90º. The STM32L432KCU MCU records the number of pulses input by the quadratures by generating interrupt signals that increase a counter variable without the MCU needing to constantly scan for these events. After each second, the counter tally is converted to angular velocity using dimensional analysis with specifications from the motor’s datasheet before being reset. By keeping track of the rising and falling edges for both quadratures, the motor’s direction can also be determined.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/quadrature_encoder.gif" class="img-fluid figure-img"></p>
+<figcaption>Animation of Quadrature Encoder. The original animation can be found <a href="https://hmc-e155.github.io/lab/lab5/">here</a></figcaption>
+</figure>
+</div>
+<div class="text-center">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  direction TB
+  A[Configure GPIOs, timers, 
+  interrupts, clock, 
+  paramter initialization]
+  C[Check QA and QB channels
+   to find interrupt source]
+
+  Z[Decoder]
+  L1(( )) ---|My text| L2(( ))
+
+  A --&gt; Z
+
+  C --&gt; D
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="design-and-testing" class="level2">
 <h2 class="anchored" data-anchor-id="design-and-testing">Design and Testing</h2>

@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -130,7 +159,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#design-and-testing" id="toc-design-and-testing" class="nav-link" data-scroll-target="#design-and-testing">Design and Testing</a></li>
-  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
+  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a>
+  <ul class="collapse">
+  <li><a href="#tim15-calculations" id="toc-tim15-calculations" class="nav-link" data-scroll-target="#tim15-calculations">TIM15 Calculations</a></li>
+  <li><a href="#tim16-calculations" id="toc-tim16-calculations" class="nav-link" data-scroll-target="#tim16-calculations">TIM16 Calculations</a></li>
+  </ul></li>
   <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
   <ul class="collapse">
   <li><a href="#electric-schematic" id="toc-electric-schematic" class="nav-link" data-scroll-target="#electric-schematic">Electric Schematic</a></li>
@@ -190,44 +223,254 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="calculations" class="level2">
 <h2 class="anchored" data-anchor-id="calculations">Calculations</h2>
+<p>Both timers operate with 16-bit ARR and PSC registers, so they must be configured carefully to ensure sufficient resolution, allow for proper operation, and avoid overflow risks. Understanding these fundamental restrictions, the operating range for note durations can be determined with Equation 1 and the timing resolution can be calculated with Equation 2.</p>
 <p>Both timer operated with 16-bit ARR and PSC registers that must be carefully configured to ensure a full range of operability with reliable resolution measurements. Maximizing the ARR and PSC values at 65535 yields the maximum duration the MCU can play a note and the minimum frequency that note could be. By minimizing these values to 0, the minimum note duration and maximum note frequency can be determined. Refer to Figures 1-4 for these calculations.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2591.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 1: Minimum Duration Calculation</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2590.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 2: Maximum Duration Calculation</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2592.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 3: Minimum Frequency Calculation</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2593.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 4: Maximum Frequency Calculation</figcaption>
-</figure>
-</div>
+<section id="tim15-calculations" class="level3">
+<h3 class="anchored" data-anchor-id="tim15-calculations">TIM15 Calculations</h3>
+<section id="maximum-and-minimum-supported-time" class="level4">
+<h4 class="anchored" data-anchor-id="maximum-and-minimum-supported-time">Maximum and Minimum Supported Time</h4>
+<p><span class="math display">\[
+T = \frac{(PSC+1)(ARR+1)}{f_{clk}}\tag{1}
+\]</span> Max and min for PSC = 0 Max and min for PSC = 399</p>
+</section>
+<section id="timing-resolution" class="level4">
+<h4 class="anchored" data-anchor-id="timing-resolution">Timing Resolution</h4>
+<p><span class="math display">\[
+Res = \frac{1}{f_{tim}} = \frac{PSC+1}{40\,MHz}\tag{2}
+\]</span></p>
+</section>
+</section>
+<section id="tim16-calculations" class="level3">
+<h3 class="anchored" data-anchor-id="tim16-calculations">TIM16 Calculations</h3>
+<section id="maximum-and-minimum-supported-frequency" class="level4">
+<h4 class="anchored" data-anchor-id="maximum-and-minimum-supported-frequency">Maximum and Minimum Supported Frequency</h4>
+<p><span class="math display">\[
+f_{out} = \frac{f_{clk}}{(PSC+1)(ARR+1)} \tag{3}
+\]</span> Max and min for PSC = 0 Max and min for PSC = 3</p>
 <p>Timer duration resolution can be determined by taking the input frequency of 40 MHz and dividing it by the prescalar. Taking this new frequency and taking its inverse yields the time step between counter ticks. This tick resolution should be capabale of handling minute time changes on the millisecond scale. The frequency output should yield less than 1% error for frequencies between 220 and 1000 Hz. For the preset prescalar, the ARR values for these frequency bounds were determined. Since this value can only be an integer, these values were then rounded and the output frequency for those rounded ARR values were computed. Error for each of these frequencies were well within the 1% error bounds as shown in Figure 6.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2595.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 5: Timer 15 Duration Resolution</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/IMG_2594.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 6: Timer 16 Frequency Resolution</figcaption>
-</figure>
-</div>
+</section>
+<section id="frequency-error-calculations" class="level4">
+<h4 class="anchored" data-anchor-id="frequency-error-calculations">Frequency Error Calculations</h4>
+<p><span class="math display">\[
+ARR = \frac{f_{clk}}{f_{des}*(PSC+1)}-1 \tag{4}
+\]</span></p>
+<table class="caption-top table">
+<caption>Table 1: Frequency Errors.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Note</th>
+<th style="text-align: center;">Freq [Hz]</th>
+<th style="text-align: center;">ARR (int)</th>
+<th style="text-align: center;">Output Freq [Hz]</th>
+<th style="text-align: center;">Error [%]</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A3</td>
+<td style="text-align: center;">220.0</td>
+<td style="text-align: center;">45454</td>
+<td style="text-align: center;">219.998</td>
+<td style="text-align: center;">0.0010</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A3 <span class="math inline">\(\sharp\)</span> / B3 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">233.1</td>
+<td style="text-align: center;">42899</td>
+<td style="text-align: center;">233.100</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B3</td>
+<td style="text-align: center;">246.9</td>
+<td style="text-align: center;">40501</td>
+<td style="text-align: center;">246.901</td>
+<td style="text-align: center;">0.0006</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">C4</td>
+<td style="text-align: center;">261.6</td>
+<td style="text-align: center;">38225</td>
+<td style="text-align: center;">261.602</td>
+<td style="text-align: center;">0.0008</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C4 <span class="math inline">\(\sharp\)</span> / D4 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">277.2</td>
+<td style="text-align: center;">36074</td>
+<td style="text-align: center;">277.200</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D4</td>
+<td style="text-align: center;">293.7</td>
+<td style="text-align: center;">34047</td>
+<td style="text-align: center;">293.703</td>
+<td style="text-align: center;">0.0010</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">D4 <span class="math inline">\(\sharp\)</span> / E4 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">311.1</td>
+<td style="text-align: center;">32143</td>
+<td style="text-align: center;">311.100</td>
+<td style="text-align: center;">0.0000</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">E4</td>
+<td style="text-align: center;">329.6</td>
+<td style="text-align: center;">30339</td>
+<td style="text-align: center;">329.598</td>
+<td style="text-align: center;">0.0006</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F4</td>
+<td style="text-align: center;">349.2</td>
+<td style="text-align: center;">28636</td>
+<td style="text-align: center;">349.199</td>
+<td style="text-align: center;">0.0004</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F4 <span class="math inline">\(\sharp\)</span> / G4 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">370.0</td>
+<td style="text-align: center;">27026</td>
+<td style="text-align: center;">370.000</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">G4</td>
+<td style="text-align: center;">392.0</td>
+<td style="text-align: center;">25510</td>
+<td style="text-align: center;">392.003</td>
+<td style="text-align: center;">0.0008</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">G4 <span class="math inline">\(\sharp\)</span> / A4 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">415.3</td>
+<td style="text-align: center;">24078</td>
+<td style="text-align: center;">415.300</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A4</td>
+<td style="text-align: center;">440.0</td>
+<td style="text-align: center;">22726</td>
+<td style="text-align: center;">440.005</td>
+<td style="text-align: center;">0.0012</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A4 <span class="math inline">\(\sharp\)</span> / B4 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">466.2</td>
+<td style="text-align: center;">21449</td>
+<td style="text-align: center;">466.200</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B4</td>
+<td style="text-align: center;">493.9</td>
+<td style="text-align: center;">20246</td>
+<td style="text-align: center;">493.900</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">C5</td>
+<td style="text-align: center;">523.3</td>
+<td style="text-align: center;">19108</td>
+<td style="text-align: center;">523.314</td>
+<td style="text-align: center;">0.0026</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C5 <span class="math inline">\(\sharp\)</span> / D5 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">554.4</td>
+<td style="text-align: center;">18037</td>
+<td style="text-align: center;">554.385</td>
+<td style="text-align: center;">0.0027</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D5</td>
+<td style="text-align: center;">587.3</td>
+<td style="text-align: center;">17026</td>
+<td style="text-align: center;">587.303</td>
+<td style="text-align: center;">0.0004</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">D5 <span class="math inline">\(\sharp\)</span> / E5 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">622.2</td>
+<td style="text-align: center;">16071</td>
+<td style="text-align: center;">622.200</td>
+<td style="text-align: center;">0.0000</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">E5</td>
+<td style="text-align: center;">659.2</td>
+<td style="text-align: center;">15169</td>
+<td style="text-align: center;">659.196</td>
+<td style="text-align: center;">0.0006</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F5</td>
+<td style="text-align: center;">698.4</td>
+<td style="text-align: center;">14317</td>
+<td style="text-align: center;">698.422</td>
+<td style="text-align: center;">0.0031</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F5 <span class="math inline">\(\sharp\)</span> / G5 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">740.9</td>
+<td style="text-align: center;">13496</td>
+<td style="text-align: center;">740.905</td>
+<td style="text-align: center;">0.0007</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">G5</td>
+<td style="text-align: center;">784.0</td>
+<td style="text-align: center;">12754</td>
+<td style="text-align: center;">784.006</td>
+<td style="text-align: center;">0.0008</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">G5 <span class="math inline">\(\sharp\)</span> / A5 <span class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;">830.6</td>
+<td style="text-align: center;">12038</td>
+<td style="text-align: center;">830.634</td>
+<td style="text-align: center;">0.0041</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A5</td>
+<td style="text-align: center;">880.0</td>
+<td style="text-align: center;">11363</td>
+<td style="text-align: center;">879.972</td>
+<td style="text-align: center;">0.0032</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
 </section>
 <section id="technical-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
